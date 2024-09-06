@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<%= stylesheet_link_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <title>Twitter Clone</title>
+</head>
+<body>
+    <header class="sidebar">
+        <h2>メニュー</h2>
+        <%= link_to "Home", "index" %>
+        <%= link_to 'Explore', "explore" %>
+        <%= link_to 'Notifications', "notifications" %>
+        <%= link_to 'Messages', "messages" %>
+        <%= link_to 'Profile', "profile" %>
+        <%= link_to 'Post', "post" %>
+
+    </header>
+    <main class="content">
+        <div>
+            <h1>Notifications</h1>
+        </div>      
+        <div>
+            <!-- Post content would go here -->
+        </div>
+    </main>
+    <footer class="search">
+        <div class="header">              
+            <p><%= text_field_tag :search, nil, placeholder: "Search..." %></p>
+            <%= button_tag 'Search', type: 'submit' %>
+        </div>
+    </footer>
+</body>
+</html>
