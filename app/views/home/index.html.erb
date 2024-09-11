@@ -16,6 +16,12 @@
         <%= link_to 'Profile', "profile" %>
         <%= link_to 'Post', "post" %>
 
+        <% if session[:user_id].nil? %>
+            <%= link_to "Login", new_sessions_path, method: :get %>
+        <% else %>
+            <%= button_to "Logout", destroy_sessions_path, method: :delete %>
+        <% end %>
+
     </header>
     <main class="content">
         <div>

@@ -1,0 +1,14 @@
+<h2>User Login</h2>
+
+<%= form_with url:create_sessions_path, local: true, method: :post do |f| %>
+    <%# 学籍番号入力フォーム %>
+    <%= f.label :s_number, "学籍番号" %>
+    <%= f.text_field :s_number, class: "form-box" %>
+
+    <%# パスワード入力フォーム %>
+    <%= f.label :password, "Password" %>
+    <%= f.password_field :password, class: "form-box" %>
+
+    <%= f.submit "ログイン" %>
+
+<% end %>
