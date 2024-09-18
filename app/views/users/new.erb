@@ -13,9 +13,31 @@
     </div>
     <div class="content">
         <h1>坪内の話題が、ここに。</h1>
+        <div class="signup">
+            <h3>今すぐ参加しましょう</h3>
+            <a href="#" id="openModalBtn">アカウント作成</a>
+        </div>
         <div class="signin">
             <h3>アカウントをお持ちの場合</h3>
             <a href="#" id="openModalBtn1">ログイン</a>
+        </div>
+    </div>
+    <div class="modal1" id="myModal1">
+        <div class="modal-content1">
+            <span class="close1">&times;</span>
+            <h1>坪ッター アカウント作成</h1>
+            <%= form_with model: @user_new, url:users_path, local: true, method: :post do |f| %>
+                <%# ユーザー名の登録 %>
+                <p><%= f.text_field :name, placeholder: "名前", class: "form-box" %></p>
+
+                <%# 学籍番号登録 %> 
+                <p><%= f.text_field :s_number, placeholder: "学籍番号", class: "form-box" %></p>
+
+                <%# パスワード登録 %>
+                <p><%= f.password_field :password, placeholder: "パスワード", class: "form-box" %></p>
+
+                <%= f.submit "サインアップ", class: "btn" %>
+            <% end %>
         </div>
     </div>
     <div class="modal2" id="myModal2">
@@ -36,23 +58,34 @@
 
     <script>
         // モーダルとボタン、閉じる要素を取得
+        const modal1 = document.getElementById('myModal1');
         const modal2 = document.getElementById('myModal2');
+        const openModalBtn = document.getElementById('openModalBtn');
         const openModalBtn1 = document.getElementById('openModalBtn1');
+        const closeBtn1 = document.getElementsByClassName('close1')[0];
         const closeBtn2 = document.getElementsByClassName('close2')[0];
 
         // ボタンをクリックしてモーダルを表示
+        openModalBtn.onclick = function() {
+            modal1.style.display = 'block';
+        }
         openModalBtn1.onclick = function() {
             modal2.style.display = 'block';
         }
 
         // ×ボタンをクリックしてモーダルを非表示
+        closeBtn1.onclick = function() {
+            modal1.style.display = 'none';
+        }
         closeBtn2.onclick = function() {
             modal2.style.display = 'none';
         }
 
         // モーダル外をクリックしてモーダルを非表示
         window.onclick = function(event) {
-            if (event.target == modal2) {
+            if (event.target == modal1) {
+                modal1.style.display = 'none';
+            } else if (event.target == modal2) {
                 modal2.style.display = 'none';
             }
         }

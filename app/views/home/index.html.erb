@@ -9,17 +9,18 @@
 <body>
     <header class="sidebar">
         <h2>メニュー</h2>
-        <%= link_to "Home", "index" %>
+        <%= link_to "Home", "index"%>
         <%= link_to 'Explore', "explore" %>
         <%= link_to 'Notifications', "notifications" %>
         <%= link_to 'Messages', "messages" %>
         <%= link_to 'Profile', "profile" %>
         <%= link_to 'Post', "post" %>
 
-        <% if session[:user_id].nil? %>
+        <% if @user.nil? %>
             <%= link_to "Login", new_sessions_path, method: :get %>
         <% else %>
             <%= button_to "Logout", destroy_sessions_path, method: :delete %>
+            Login User:<%= @user.name %>
         <% end %>
 
     </header>
