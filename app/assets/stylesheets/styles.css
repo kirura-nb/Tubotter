@@ -27,7 +27,6 @@ body {
 }
 .content {
     width: 500px;
-    flex-grow: 1;
     padding: 20px;
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
@@ -66,7 +65,7 @@ body {
     font-family: Arial, sans-serif;
     font-size: 16px;
 }
-button {
+.searchbtn {
     height: 32px;
     width: 64px;
     color: #fff;
@@ -74,7 +73,113 @@ button {
     border-radius: 32px;
     border :none;
 }
-.post {
+.post-box button {
     background: #0099ff;
 }
 
+/*ログイン画面*/
+.login .logo,.content {
+    width: 540px;
+}
+.login .logo {
+    margin-top: 20px;
+}
+.login .content {
+    width: 540px;
+    margin: 100px 30px;
+    border-right: none;
+    border-left: none;
+}
+.login .content h1 {
+    font-size: 64px;
+}
+.login .content div {
+    margin-bottom: 30px;
+}
+.signup a {
+    display: block;
+    width: 300px;
+    color: white;
+    background-color: #1da1f2;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 10px 0;
+    margin: 10px 0;
+    border-radius: 24px;
+    text-align: center;
+}
+.signup a:hover {
+    background-color: #0d8ddb;
+}
+.signin a {
+    display: block;
+    width: 300px;
+    color: #1da1f2;
+    background-color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 10px 0;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 24px;
+    text-align: center;
+}
+.signin a:hover {
+    background-color: #eee;
+}
+
+
+/*ログイン画面*/
+.modal1, .modal2 {
+    display: none; /* 初期状態では非表示 */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* 背景を半透明に */
+    justify-content: center;
+}
+
+/*アカウント作成*/
+.modal-content1, .modal-content2 {
+    background-color: white;
+    padding: 60px;
+    border-radius: 5px;
+    text-align: center;
+    width: 300px;
+    margin: 200px auto;
+}
+
+.modal-content1 input, .modal-content2 input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.modal-content1 .btn, .modal-content2 .btn {
+    width: auto;
+    padding: 10px 20px;
+    background-color: #1da1f2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.modal-content1 button:hover, .modal-content2 button:hover {
+    background-color: #0d8de0;
+}
+
+
+
+/* 閉じるボタン */
+
+.close1, .close2 {
+    display: block;
+    position: absolute;
+    margin: -40px 0px 0px 320px;
+    font-size: 24px;
+    cursor: pointer;
+}
