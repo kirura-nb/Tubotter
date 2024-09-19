@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root :to => "home#index"
+  # root :to => "home#index"
+   root :to => "users#new"
 
   # 新規登録画面のルート
   resource :users, only: [:new, :show, :edit, :create, :update]
