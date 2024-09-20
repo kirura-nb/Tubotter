@@ -14,7 +14,7 @@
         <%= link_to 'Notifications', "notifications" %>
         <%= link_to 'Messages', "messages" %>
         <%= link_to 'Profile', "profile" %>
-        <%= link_to 'Post', "post" %>
+        <%= link_to 'Post', "message_post" %>
 
         <% if @user.nil? %>
             <%= link_to "Login", new_sessions_path, method: :get %>
@@ -30,6 +30,9 @@
         </div>      
         <div>
             <!-- Post content would go here -->
+            <% @messages.each do |message| %>
+                <p><%= message.content %></p>
+            <% end %>
         </div>
     </main>
     <footer class="search">

@@ -55,7 +55,7 @@ body {
 .post-box {
     margin: 20px 0;
 }
-.post-box textarea {
+.message_content {
     resize: none;
     width: 470px;
     height: 300px;
@@ -73,7 +73,7 @@ body {
     border-radius: 32px;
     border :none;
 }
-.post-box button {
+.post-box .searchbtn {
     background: #0099ff;
 }
 
