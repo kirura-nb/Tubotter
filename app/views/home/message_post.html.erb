@@ -14,15 +14,17 @@
         <%= link_to 'Notifications', "notifications" %>
         <%= link_to 'Messages', "messages" %>
         <%= link_to 'Profile', "profile" %>
-        <%= link_to 'Post', "post" %>
+        <%= link_to 'Post', "message_post" %>
 
     </header>
     <main class="content">
         <div class="post-box">
             <h1>Post</h1>
-            <textarea placeholder="What's happening?"></textarea>
-            <button class="searchbtn">Post</button>
-        </div>      
+            <%= form_for(@message, url: "/home") do |f| %>
+                <%= f.text_area :content, class: "message_content" %>
+                <%= f.submit "Post", class: "searchbtn" %>
+            <% end %>
+        </div>
         <div>
             <!-- Post content would go here -->
         </div>

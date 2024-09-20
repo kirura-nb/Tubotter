@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get "home/explore"
   get "home/messages"
   get "home/notifications"
-  get "home/post"
+  get "home/message_post", as: "message_post"
   get "home/profile"
+
+  # ツイート表示のパス
+  post "home" => "home#create"
 end
