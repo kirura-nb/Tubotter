@@ -2,19 +2,28 @@ class HomeController < ApplicationController
     before_action :current_user
 
     def index
-        @tweet = Tweet.all.order(created_at: :desc)
+        @tweet = Tweet.new
+        @tweets = Tweet.all.order(created_at: :desc)
     end
 
     # ツイート
-    def message_post
+    def explore
         @tweet = Tweet.new
-        
+    end
+    def notifications
+        @tweet = Tweet.new
+    end
+    def messages
+        @tweet = Tweet.new
+    end
+    def profile
+        @tweet = Tweet.new
     end
 
     def create
         tweet = Tweet.new(tweet_params)
         tweet.save
-        redirect_to message_post_path
+        redirect_to home_index_path
     end
 
     private

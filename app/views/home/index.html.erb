@@ -8,40 +8,117 @@
 </head>
 <body>
     <header class="sidebar">
-        <h2>メニュー</h2>
-        <%= link_to "Home", "index"%>
-        <%= link_to 'Explore', "explore" %>
-        <%= link_to 'Notifications', "notifications" %>
-        <%= link_to 'Messages', "messages" %>
-        <%= link_to 'Profile', "profile" %>
-        <%= link_to 'Post', "message_post" %>
+        <%= link_to image_tag("/assets/starlin _logo.png", class: "home_logo"), "index" %>
+
+        <div>
+            <p><img src="/assets/home/home.png"></p>
+            <%= link_to "Home", "index"%>
+        </div>
+        <div>
+            <p><img src="/assets/home/explore.png"></p>
+            <%= link_to 'Explore', "explore" %>
+        </div>
+        <div>
+            <p><img src="/assets/home/notifications.png"></p>
+            <%= link_to 'Notifications', "notifications" %>
+        </div>
+        <div>
+            <p><img src="/assets/home/message.png"></p>
+            <%= link_to 'Messages', "messages" %>
+        </div>
+        <div>
+            <p><img src="/assets/home/pofile.png"></p>
+            <%= link_to 'Profile', "profile" %>
+        </div>
+        
+        <a href="#" class="postbtn" id="openModalpostBtn" >Post</a>
 
         <% if @user.nil? %>
             <%= link_to "Login", new_sessions_path, method: :get %>
         <% else %>
-            <%= button_to "Logout", destroy_sessions_path, method: :delete %>
-            Login User:<%= @user.name %>
+            <%# ログインユーザー名表示 %>
+            <div class="accountbar">
+                <a href="#" id="openModalbarBtn">
+                    <img src="/assets/home/icon.jpg">
+                    <p class="namead"><%= @user.name %></p>
+                    <img src="/assets/home/tententen.png" class="tententen">
+                </a>  
+            </div>
+            <%# ログアウトボタン %>
+            <div class="bar" id="barModal">
+                <div class="modal-content4">
+                    <%= button_to "Logout", destroy_sessions_path,  method: :delete, class: "logout" %>
+                </div>
+            </div>
         <% end %>
-
     </header>
+
     <main class="content">
         <div>
-            <h1>Home</h1>
-        </div>      
-        <div>
-            <!-- Post content would go here -->
-            <% @tweet.each do |tweet| %>
+            <%#ツイート（投稿）機能 %>
+            <div class="post" id="postModal">
+                <div class="modal-content3">
+                    <span class="close3">&times;</span>
+                    <%= form_for(@tweet, url: "/home") do |f| %>
+                        <%= f.hidden_field :user_name, value: @user.name %>
+                        <%= f.hidden_field :user_number, value: @user.s_number %>
+                        <%# ツイートの書き込み %>
+                        <%= f.text_area :content, class: "message_content" %>
+                        <%= f.hidden_field :comment, value: nil %>
+                        <%= f.hidden_field :diffusion, value: nil %>
+                        <%= f.hidden_field :like, value: nil %>
+                        <%= f.submit "Post", class: "searchbtn" %>
+                    <% end %>
+                </div>
+            </div>
+            
+            <%# ツイート内容の表示 %>
+            <% @tweets.each do |tweet| %>
                 <h3><%= tweet.user_name %></h3><p><%= tweet.user_number %></p>
                 <p><%= tweet.content %></p>
-                <p><%= tweet.created_at %></p>
+                <p><%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %></p>
             <% end %>
         </div>
     </main>
     <footer class="search">
         <div class="header">              
             <p><%= text_field_tag :search, nil, placeholder: "Search..." %></p>
-            <%= button_tag 'Search', type: 'submit' %>
+            <%= button_tag 'Search', type: 'submit', class: "searchbtn" %>
         </div>
     </footer>
+
+    <script>
+        /*ポスト*/
+        const tweet = document.getElementById('postModal');
+        const openModalpostBtn = document.getElementById('openModalpostBtn');
+        const closeBtn3 = document.getElementsByClassName('close3')[0];
+
+        openModalpostBtn.onclick = function() {
+            tweet.style.display = 'block';
+        }
+
+        closeBtn3.onclick = function() {
+            tweet.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == tweet) {
+                post.style.display = 'none';
+            }
+        }
+
+        /*アカウントバー*/
+        const bar = document.getElementById('barModal');
+        const openModalbarBtn = document.getElementById('openModalbarBtn');
+
+        openModalbarBtn.onclick = function() {
+            // モーダルが表示されているかどうかを切り替える
+            if (bar.style.display === 'block') {
+                bar.style.display = 'none'; // モーダルを非表示
+            } else {
+                bar.style.display = 'block'; // モーダルを表示
+            }
+        }
+    </script>
 </body>
 </html>
