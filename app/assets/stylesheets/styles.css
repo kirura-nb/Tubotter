@@ -1,81 +1,175 @@
 @charset "UTF-8";
 body {
     font-family: Arial, sans-serif;
-    width: 1080px;
+    width: 1200px;
     display: flex;
     margin: 0 auto;
 }
+
+/*メニュー*/
+.home_logo {
+    width: 100px;
+    height: auto;
+}
 .sidebar {
-    width: 250px;
-    background-color: #1da1f2;
-    color: white;
+    position: sticky; /* スクロールすると固定される */
+    top: 0; /* スクロールで最上部に固定 */
+    width: 260px;
+    background-color: #fff;
+    color: #000;
     height: 100vh;
-    padding: 20px;
+    padding: 10px;
+    margin-right: 10px;
     box-sizing: border-box;
 }
 .sidebar a {
     display: block;
-    color: white;
+    color: #000;
     text-decoration: none;
-    padding: 10px 0;
+    padding: 10px;
     margin: 10px 0;
     border-radius: 4px;
-    text-align: center;
+    text-align: left;
 }
 .sidebar a:hover {
+    background-color: #ddd;
+}
+.sidebar div {
+    display: flex;
+}
+.sidebar div img {
+    width: 28px;
+    height: auto;
+}
+.sidebar .postbtn {
+    color: #fff;
+    background-color: #1da1f2;
+    border-radius: 64px;
+    padding: 15px;
+    text-align: center;
+}
+.sidebar .postbtn:hover {
     background-color: #0d8ddb;
 }
+
+/*アカウントバー*/
+.accountbar {
+    position: absolute;
+    bottom: 0;
+    margin: 10px 0px;
+}
+
+.accountbar a {
+    display: flex;
+    width: 250px;
+    border-radius: 64px;
+    padding: 0px;
+    margin: 10px 0px 15px -10px;
+}
+.accountbar a:hover {
+    background-color: #ddd;
+}
+.accountbar a img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 10px;
+}
+.accountbar a .namead {
+    font-weight: 600;
+}
+.accountbar .tententen {
+    width: 24px;
+    height: 24px;
+    margin: 16px 10px 10px auto;
+    border: 1px solid #ccc;
+}
+
+.sidebar .bar {
+    display: none; /* 初期状態では非表示 */
+    position: absolute;
+    bottom: 100px;
+}
+
+.modal-content4 {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 10px;
+    width: 200px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.logout {
+    border: none;
+    background-color: #fff;
+    /* margin: auto; */
+    padding-left: 75px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+
+
+/*ポスト*/
+.post {
+    display: none; /* 初期状態では非表示 */
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5); /* 背景を半透明に */
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+
+.modal-content3 {
+    background-color: white;
+    padding: 60px;
+    border-radius: 5px;
+    text-align: center;
+    width: 300px;
+    margin: 200px auto;
+}
+
+.modal-content3 input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.modal-content3 button{
+    padding: 10px 20px;
+    background-color: #1da1f2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.modal-content3 button:hover {
+    background-color: #0d8de0;
+}
+
 .content {
     width: 500px;
     padding: 20px;
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
 }
-.search {
+
+
+/* メインコンテンツ */
+.content {
+    width: calc(100% - 260px); /* サイドバーの幅分を引いて全体の幅を調整 */
     padding: 20px;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
 }
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
-    margin-top: 20px;
-}
-.header input {
-    width: 200px;
-    padding: 5px;
-    margin-right: 10px;
-    border-radius: 32px;
-    border: 1px solid #ccc;
-}
-.header p {
-    margin: 0 0 0 auto;
-}
-.post-box {
-    margin: 20px 0;
-}
-.message_content {
-    resize: none;
-    width: 470px;
-    height: 300px;
-    padding: 10px;
-    border-radius: 12px;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-}
-.searchbtn {
-    height: 32px;
-    width: 64px;
-    color: #fff;
-    background: #000;
-    border-radius: 32px;
-    border :none;
-}
-.post-box .searchbtn {
-    background: #0099ff;
-}
+
 
 /*ログイン画面*/
 .login .logo,.content {
@@ -129,7 +223,7 @@ body {
 }
 
 
-/*ログイン画面*/
+/*ログイン,アカウント作成*/
 .modal1, .modal2 {
     display: none; /* 初期状態では非表示 */
     position: absolute;
@@ -140,7 +234,6 @@ body {
     justify-content: center;
 }
 
-/*アカウント作成*/
 .modal-content1, .modal-content2 {
     background-color: white;
     padding: 60px;
@@ -158,8 +251,7 @@ body {
     border-radius: 5px;
 }
 
-.modal-content1 .btn, .modal-content2 .btn {
-    width: auto;
+.modal-content1 button, .modal-content2 button {
     padding: 10px 20px;
     background-color: #1da1f2;
     color: white;
@@ -176,10 +268,104 @@ body {
 
 /* 閉じるボタン */
 
-.close1, .close2 {
+.close1, .close2, .close3{
     display: block;
     position: absolute;
     margin: -40px 0px 0px 320px;
     font-size: 24px;
     cursor: pointer;
 }
+
+/*プロフィール画面*/
+.name {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.208);
+    position: absolute;
+    z-index: 2;
+}
+.yoko {
+    display: flex;
+}
+.edit {
+    margin-left: 260px;
+}
+.tab {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 500px;
+}
+
+.tab > label {
+    flex: 1 1;
+    order: -1;
+    min-width: 70px;
+    padding: .7em 1em .5em;
+    background-color: #f2f2f2;
+    color: #999;
+    font-weight: 600;
+    font-size: .9em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tab > label:hover {
+    opacity: .8;
+}
+
+.tab input {
+    display: none;
+}
+
+.tab > div {
+    display: none;
+    width: 100%;
+    padding: 1.5em 1em;
+    background-color: #fff;
+}
+
+.tab label:has(:checked) {
+    border-bottom: 4px solid #2589d0;
+    color: #2589d0;
+}
+
+.tab label:has(:checked) + div {
+    display: block;
+}
+
+
+/*検索*/
+.search {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-top: 20px;
+}
+.header input {
+    width: 200px;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 32px;
+    border: 1px solid #ccc;
+}
+.header p {
+    margin: 0 0 0 auto;
+}
+
+
+.searchbtn {
+    height: 32px;
+    width: 64px;
+    color: #fff;
+    background: #000;
+    border-radius: 32px;
+    border :none;
+    cursor: pointer;
+}
+
+
