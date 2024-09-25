@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_20_013509) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_24_044650) do
   create_table "messages", force: :cascade do |t|
     t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tweets", force: :cascade do |t|
+    t.string "user_name"
+    t.string "user_number"
+    t.datetime "t_time"
+    t.text "content"
+    t.text "comment"
+    t.integer "diffusion"
+    t.integer "like"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

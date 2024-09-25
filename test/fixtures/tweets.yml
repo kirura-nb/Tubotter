@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_name: MyString
+  user_number: MyString
+  t_time: 2024-09-24 13:46:50
+  content: MyText
+  comment: MyText
+  diffusion: 1
+  like: 1
+
+two:
+  user_name: MyString
+  user_number: MyString
+  t_time: 2024-09-24 13:46:50
+  content: MyText
+  comment: MyText
+  diffusion: 1
+  like: 1

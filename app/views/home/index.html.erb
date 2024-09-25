@@ -30,8 +30,10 @@
         </div>      
         <div>
             <!-- Post content would go here -->
-            <% @messages.each do |message| %>
-                <p><%= message.content %></p>
+            <% @tweet.each do |tweet| %>
+                <h3><%= tweet.user_name %></h3><p><%= tweet.user_number %></p>
+                <p><%= tweet.content %></p>
+                <p><%= tweet.created_at %></p>
             <% end %>
         </div>
     </main>

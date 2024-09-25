@@ -20,8 +20,14 @@
     <main class="content">
         <div class="post-box">
             <h1>Post</h1>
-            <%= form_for(@message, url: "/home") do |f| %>
+            <%= form_for(@tweet, url: "/home") do |f| %>
+                <%= f.hidden_field :user_name, value: @user.name %>
+                <%= f.hidden_field :user_number, value: @user.s_number %>
+                <%# ツイートの書き込み %>
                 <%= f.text_area :content, class: "message_content" %>
+                <%= f.hidden_field :comment, value: nil %>
+                <%= f.hidden_field :diffusion, value: nil %>
+                <%= f.hidden_field :like, value: nil %>
                 <%= f.submit "Post", class: "searchbtn" %>
             <% end %>
         </div>
