@@ -11,6 +11,28 @@
   </head>
 
   <body>
+    <div class="notifications">
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: key) %>
+      <% end %>
+    </div>
     <%= yield %>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          var notice = document.querySelector('.notice');
+          var alert = document.querySelector('.alert');
+
+          if (notice) {
+            notice.style.display = 'none';
+          }
+
+          if (alert) {
+            alert.style.display = 'none';
+          }
+        }, 3000); // 3秒後に非表示
+      });
+    </script>
   </body>
 </html>

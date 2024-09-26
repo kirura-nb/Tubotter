@@ -17,8 +17,10 @@ class UsersController < ApplicationController
 
         if @user_new.save
             session[:user_id] = @user_new.id
+            flash[:notice] = "アカウントを作成しました。"
             redirect_to home_index_path
         else
+            flash.now[:alert] = "アカウント作成に失敗しました。"
             render action: "new"
         end
     end
