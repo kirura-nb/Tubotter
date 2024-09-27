@@ -68,26 +68,74 @@
                     <%= f.hidden_field :diffusion, value: nil %>
                     <%= f.hidden_field :like, value: nil %>
                     <%= f.submit "Post", class: "btn" %>
-                    <%# 削除ボタン %>
                 <% end %>
             </div>
         </div>
-            
+        
         <%# ツイート内容の表示 %>
-        <% @tweets.each do |tweet| %>
-            <h3><%= tweet.user_name %></h3><p><%= tweet.user_number %></p>
-            <p><%= tweet.content %></p>
-            <p><%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-            <% if @user.s_number == tweet.user_number %>
-                <%= button_to tweet_destroy_path(tweet.id), method: :delete, class: "destroy_btn" do %>
-                    <%= image_tag("/assets/home/delete.png", alt: "削除") %>
+        <div class="display_slct">
+            <%# 全体の投稿 %>
+            <label>
+                <input type="radio" name="tab" checked>
+                For you
+            </label>
+            <div class="tweet_area">
+                <% @tweets.each do |tweet| %>
+                    <div class="tweet">
+                        <img src="/assets/home/icon.jpg" class="icon">
+                        <h3><%= tweet.user_name %></h3>
+                        <p>@<%= tweet.user_number %></p>
+                        <p><%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+                        <%# 削除ボタン %>
+                        <% if @user.s_number == tweet.user_number %>
+                            <%= button_to tweet_destroy_path(tweet.id), method: :delete, class: "destroy_btn" do %>
+                                <%= image_tag("/assets/home/delete.png", alt: "削除") %>
+                            <% end %>
+                        <% else %>
+                            <%= button_to "", class: "menu_btn" do %>
+                                <%= image_tag("/assets/home/tententen.png", alt: "投稿メニュー") %>
+                            <% end %>
+                        <% end %>
+                    </div>
+                    <%# 投稿表示 %>
+                    <p class="tweet_content"><%= tweet.content %></p>
+                    <%# 返信やいいねなど %>
+                    <div class="good">
+                        <%= button_to "" do %>
+                            <%= image_tag("/assets/home/post.png", alt: "返信") %>
+                        <% end %>
+                        <% if tweet.like == nil %>
+                            <p></p>
+                        <% elsif tweet.like <= 1 %>
+                            <p>0</p>
+                        <% end %>
+                        <%= button_to "" do %>
+                            <%= image_tag("/assets/home/RT.png", alt: "RT") %>
+                        <% end %>
+                        <% if tweet.like == nil %>
+                            <p></p>
+                        <% elsif tweet.like <= 1 %>
+                            <p>0</p>
+                        <% end %>
+                        <%= button_to "" do %>
+                            <%= image_tag("/assets/home/good.png", alt: "いいね") %>
+                        <% end %>
+                        <% if tweet.like == nil %>
+                            <p></p>
+                        <% elsif tweet.like <= 1 %>
+                            <p>0</p>
+                        <% end %>
+                    </div>
                 <% end %>
-            <% else %>
-                <%= button_to "", class: "menu_btn" do %>
-                    <%= image_tag("/assets/home/tententen.png", alt: "投稿メニュー") %>
-                <% end %>
-            <% end %>
-        <% end %>
+            </div>
+            <%# フォローメンバーの投稿 %>
+            <label>
+                <input type="radio" name="tab">
+                Following
+            </label>
+        <div>
+
+        </div>
     </main>
     <footer class="search">
         <div class="header">              

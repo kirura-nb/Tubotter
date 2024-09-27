@@ -60,16 +60,48 @@
                 <input type="radio" name="tab" checked>
                 post
             </label>
-            <div>
-                <%# ツイート内容の表示 %>
+            <div class="tweet_area">
                 <% @tweets.each do |tweet| %>
                     <% if @user.s_number == tweet.user_number %>
-                        <h3><%= tweet.user_name %></h3><p><%= tweet.user_number %></p>
-                        <p><%= tweet.content %></p>
-                        <p><%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-                        <%= button_to tweet_destroy_path(tweet.id), method: :delete, class: "destroy_btn" do %>
-                            <%= image_tag("/assets/home/delete.png", alt: "削除") %>
+                        <div class="tweet">
+                            <img src="/assets/home/icon.jpg" class="icon">
+                            <h3><%= tweet.user_name %></h3>
+                            <p>@<%= tweet.user_number %></p>
+                            <p><%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+                            <%# 削除ボタン %>
+                            <%= button_to tweet_destroy_path(tweet.id), method: :delete, class: "destroy_btn" do %>
+                                <%= image_tag("/assets/home/delete.png", alt: "削除") %>
+                            <% end %>
+                        </div>
+                        <%# 投稿表示 %>
+                        <p class="tweet_content"><%= tweet.content %></p>
+                        <%# 返信やいいねなど %>
+                        <div class="good">
+                            <%= button_to "" do %>
+                                <%= image_tag("/assets/home/post.png", alt: "返信") %>
+                            <% end %>
+                        <% if tweet.like == nil %>
+                            <p></p>
+                        <% elsif tweet.like <= 1 %>
+                            <p>0</p>
                         <% end %>
+                            <%= button_to "" do %>
+                                <%= image_tag("/assets/home/RT.png", alt: "RT") %>
+                            <% end %>
+                        <% if tweet.like == nil %>
+                            <p></p>
+                        <% elsif tweet.like <= 1 %>
+                            <p>0</p>
+                        <% end %>
+                            <%= button_to "" do %>
+                                <%= image_tag("/assets/home/good.png", alt: "いいね") %>
+                            <% end %>
+                        <% if tweet.like == nil %>
+                            <p></p>
+                        <% elsif tweet.like <= 1 %>
+                            <p>0</p>
+                        <% end %>
+                        </div>
                     <% end %>
                 <% end %>
             </div>
