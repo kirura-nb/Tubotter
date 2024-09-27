@@ -1,10 +1,37 @@
 @charset "UTF-8";
+/* メニュー */
+/*アカウントバー*/
+/*ポスト*/
+/* メインコンテンツ */
+/* 投稿削除ボタン */
+/*ログイン画面*/
+/*ログイン,アカウント作成*/
+/* 閉じるボタン */
+/* Tweet（投稿）デザイン */
+/*プロフィール画面*/
+/*検索*/
+
+
+
 body {
     font-family: Arial, sans-serif;
-    width: 1200px;
     display: flex;
+    /* justify-content: center; */
     margin: 0 auto;
+    padding: 0;
+    width: 1200px;
 }
+main {
+    flex-basis: 601.5px; /* メインコンテンツの幅を指定 */
+    /* padding: 10px; */
+    box-sizing: border-box;
+    border-right: 1px solid #ccc; /* 右に境界線を追加 */
+    border-left: 1px solid #ccc; /* 左に境界線を追加 */
+    
+}
+
+
+
 
 /*メニュー*/
 .home_logo {
@@ -12,8 +39,8 @@ body {
     height: auto;
 }
 .sidebar {
-    position: sticky; /* スクロールすると固定される */
-    top: 0; /* スクロールで最上部に固定 */
+    position: sticky;
+    top: 0;
     width: 260px;
     background-color: #fff;
     color: #000;
@@ -52,6 +79,8 @@ body {
     background-color: #0d8ddb;
 }
 
+
+
 /*アカウントバー*/
 .accountbar {
     position: absolute;
@@ -84,13 +113,11 @@ body {
     margin: 16px 10px 10px auto;
     border: 1px solid #ccc;
 }
-
 .sidebar .bar {
-    display: none; /* 初期状態では非表示 */
+    display: none;
     position: absolute;
     bottom: 100px;
 }
-
 .modal-content4 {
     background-color: white;
     border: 1px solid #ccc;
@@ -100,7 +127,6 @@ body {
     height: 25px;
     cursor: pointer;
 }
-
 .logout {
     border: none;
     background-color: #fff;
@@ -109,6 +135,7 @@ body {
     cursor: pointer;
     font-size: 16px;
 }
+
 
 
 /*ポスト*/
@@ -120,8 +147,8 @@ body {
     top: 0;
     left: 0;
     height: 100%;
+    z-index: 1;
 }
-
 .modal-content3 {
     display: flex;
     background-color: white;
@@ -131,7 +158,6 @@ body {
     height: 300px;
     margin: 200px auto;
 }
-
 .modal-content3 img {
     width: 35px;
     height: 35px;
@@ -152,8 +178,6 @@ body {
     overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
 }
-
-
 .modal-content3 .btn {
     position: relative;
     background-color: #1da1f2;
@@ -166,11 +190,9 @@ body {
     padding: 10px 18px;
     font-size: 14px;
 }
-
 .modal-content3 button:hover {
     background-color: #0d8de0;
 }
-
 .close3{
     display: block;
     position: absolute;
@@ -180,26 +202,15 @@ body {
 }
 
 
+
+
 /* メインコンテンツ */
-.content {
-    width: calc(100% - 260px); /* サイドバーの幅分を引いて全体の幅を調整 */
-    padding: 0 20px;
+.content, .prof_content {
+    width: 600px;
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
 }
-/* 削除ボタン */
-.destroy_btn, .menu_btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    padding: 0;
-    appearance: none;
-}
-.destroy_btn img, .menu_btn img {
-    width: 32px;
-    height: auto;
-}
+
 
 
 /*ログイン画面*/
@@ -254,17 +265,17 @@ body {
 }
 
 
+
 /*ログイン,アカウント作成*/
 .modal1, .modal2 {
-    display: none; /* 初期状態では非表示 */
+    display: none;
     position: absolute;
     width: 100%;
     height: 100%;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* 背景を半透明に */
+    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
 }
-
 .modal-content1, .modal-content2 {
     background-color: white;
     padding: 60px;
@@ -273,7 +284,6 @@ body {
     width: 300px;
     margin: 200px auto;
 }
-
 .modal-content1 input, .modal-content2 input {
     width: 100%;
     padding: 10px;
@@ -281,7 +291,6 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-
 .modal-content1 .btn, .modal-content2 .btn {
     width: auto;
     padding: 10px 20px;
@@ -291,7 +300,6 @@ body {
     cursor: pointer;
     border-radius: 5px;
 }
-
 .modal-content1 button:hover, .modal-content2 .btn:hover {
     background-color: #0d8de0;
 }
@@ -307,12 +315,145 @@ body {
     cursor: pointer;
 }
 
+
+
+/* Tweet（投稿）デザイン */
+.display_slct {
+    position: relative;
+    text-align: center;
+    width: 600px;
+    z-index: 0;
+}
+.tweet_area button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+}
+.tweet_area button img {
+    width: 30px;
+    height: auto;
+    margin-right: 5px;
+}
+.tweet {
+    display: flex;
+    padding: 10px;
+}
+.icon {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 10px;
+    margin-top: 10px;
+    border-radius: 50%;
+}
+.tweet h3 {
+    margin: 10px 10px 0 5px;
+    padding: 0 5px 0 65px;
+    font-size: 1.25em;
+}
+.tweet p {
+    margin: 15px 20px 0 0;
+}
+.tweet_menu {
+    position: absolute;
+    top: 50px;
+    right: 15px;
+}
+.tweet_content {
+    width: 510px;
+    height: auto;
+    margin: 0 0 0 65px;
+    text-align: left;
+    font-size: 18px;
+    word-wrap: break-word;
+}
+.tweet img, .tweet h2, .tweet {
+    padding: 0;
+}
+.display_slct {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+}
+.display_slct > label {
+    flex: 1 1;
+    order: -1;
+    min-width: 70px;
+    padding: .7em 1em .5em;
+    background-color: #f2f2f2;
+    color: #999;
+    font-weight: 600;
+    font-size: .9em;
+    text-align: center;
+    cursor: pointer;
+}
+.display_slct > label:hover {
+    opacity: .8;
+}
+.display_slct input {
+    display: none;
+}
+.display_slct > div {
+    display: none;
+    width: 100%;
+    background-color: #fff;
+}
+.display_slct label:has(:checked) {
+    border-bottom: 4px solid #2589d0;
+    color: #2589d0;
+}
+.display_slct label:has(:checked) + div {
+    display: block;
+}
+.good {
+    display: flex;
+    padding-left: 60px;
+    height: 35px;
+    margin-top: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.good p {
+    margin: 7px 50px 0 0;
+}
+.tweet_area button img[alt="返信"] {
+    width: 32px;
+    height: auto;
+    margin: 3px 5px 0 0;
+}
+.tweet_area button img[alt="いいね"] {
+    width: 23px;
+    height: auto;
+    margin: 4px 5px 0 0;
+}
+
+
+
+/* 投稿削除ボタン */
+.destroy_btn, .menu_btn {
+    position: absolute;
+    right: 15px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+}
+.destroy_btn img, .menu_btn img {
+    width: 32px;
+    height: auto;
+    margin-top: 10px;
+}
+
+
+
 /*プロフィール画面*/
 .prof_content {
-    width: 600px;
+    position: relative;
     padding: 0;
-    border-right: 1px solid #ccc;
-    border-left: 1px solid #ccc;
 } 
 .profile {
     width:600px;
@@ -337,7 +478,6 @@ body {
     flex-wrap: wrap;
     max-width: 600px;
 }
-
 .tab > label {
     flex: 1 1;
     order: -1;
@@ -350,37 +490,31 @@ body {
     text-align: center;
     cursor: pointer;
 }
-
 .tab > label:hover {
     opacity: .8;
 }
-
 .tab input {
     display: none;
 }
-
 .tab > div {
     display: none;
     width: 100%;
-    padding: 1.5em 1em;
     background-color: #fff;
 }
-
 .tab label:has(:checked) {
     border-bottom: 4px solid #2589d0;
     color: #2589d0;
 }
-
 .tab label:has(:checked) + div {
     display: block;
 }
+
 
 
 /*検索*/
 .search {
     padding: 20px;
 }
-
 .header {
     display: flex;
     justify-content: space-between;
@@ -399,8 +533,6 @@ body {
 .header p {
     margin: 0 0 0 auto;
 }
-
-
 .searchbtn {
     height: 32px;
     width: 64px;
@@ -410,5 +542,3 @@ body {
     border :none;
     cursor: pointer;
 }
-
-
