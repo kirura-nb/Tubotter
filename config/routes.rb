@@ -20,4 +20,7 @@ Rails.application.routes.draw do
 
   # ツイート表示のパス
   post "home" => "home#create"
+
+  # ツイートの削除
+  delete "home/:id" => "home#destroy", as: "tweet_destroy"
 end

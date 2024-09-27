@@ -54,31 +54,40 @@
     </header>
 
     <main class="content">
-        <div>
-            <%#ツイート（投稿）機能 %>
-            <div class="post" id="postModal">
-                <div class="modal-content3">
-                    <span class="close3">&times;</span>
-                    <%= form_for(@tweet, url: "/home") do |f| %>
-                        <%= f.hidden_field :user_name, value: @user.name %>
-                        <%= f.hidden_field :user_number, value: @user.s_number %>
-                        <%# ツイートの書き込み %>
-                        <%= f.text_area :content, class: "message_content" %>
-                        <%= f.hidden_field :comment, value: nil %>
-                        <%= f.hidden_field :diffusion, value: nil %>
-                        <%= f.hidden_field :like, value: nil %>
-                        <%= f.submit "Post", class: "searchbtn" %>
-                    <% end %>
-                </div>
+        <%#ツイート（投稿）機能 %>
+        <div class="post" id="postModal">
+            <div class="modal-content3">
+                <span class="close3">&times;</span>
+                <img src="/assets/home/icon.jpg">
+                <%= form_for(@tweet, url: "/home") do |f| %>
+                    <%= f.hidden_field :user_name, value: @user.name %>
+                    <%= f.hidden_field :user_number, value: @user.s_number %>
+                    <%# ツイートの書き込み %>
+                    <%= f.text_area :content, rows: 7, placeholder: "What's happening?!", class: "message_content" %>
+                    <%= f.hidden_field :comment, value: nil %>
+                    <%= f.hidden_field :diffusion, value: nil %>
+                    <%= f.hidden_field :like, value: nil %>
+                    <%= f.submit "Post", class: "btn" %>
+                    <%# 削除ボタン %>
+                <% end %>
             </div>
-            
-            <%# ツイート内容の表示 %>
-            <% @tweets.each do |tweet| %>
-                <h3><%= tweet.user_name %></h3><p><%= tweet.user_number %></p>
-                <p><%= tweet.content %></p>
-                <p><%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-            <% end %>
         </div>
+            
+        <%# ツイート内容の表示 %>
+        <% @tweets.each do |tweet| %>
+            <h3><%= tweet.user_name %></h3><p><%= tweet.user_number %></p>
+            <p><%= tweet.content %></p>
+            <p><%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+            <% if @user.s_number == tweet.user_number %>
+                <%= button_to tweet_destroy_path(tweet.id), method: :delete, class: "destroy_btn" do %>
+                    <%= image_tag("/assets/home/delete.png", alt: "削除") %>
+                <% end %>
+            <% else %>
+                <%= button_to "", class: "menu_btn" do %>
+                    <%= image_tag("/assets/home/tententen.png", alt: "投稿メニュー") %>
+                <% end %>
+            <% end %>
+        <% end %>
     </main>
     <footer class="search">
         <div class="header">              

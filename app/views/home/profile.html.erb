@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="styles.css">
+	<%= stylesheet_link_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
     <title>Twitter Clone</title>
 </head>
 <body>
@@ -53,29 +53,59 @@
         <% end %>
     </header>
 
-    <main class="content">
-        <div>
-            <h1>Profile</h1>
-            <%#ツイート（投稿）機能 %>
-            <div class="post" id="postModal">
-                <div class="modal-content3">
-                    <span class="close3">&times;</span>
-                    <%= form_for(@tweet, url: "/home") do |f| %>
-                        <%= f.hidden_field :user_name, value: @user.name %>
-                        <%= f.hidden_field :user_number, value: @user.s_number %>
-                        <%# ツイートの書き込み %>
-                        <%= f.text_area :content, class: "message_content" %>
-                        <%= f.hidden_field :comment, value: nil %>
-                        <%= f.hidden_field :diffusion, value: nil %>
-                        <%= f.hidden_field :like, value: nil %>
-                        <%= f.submit "Post", class: "searchbtn" %>
+    <main class="prof_content">
+        <%# プロフ表示 %>
+        <div class="tab">
+            <label>
+                <input type="radio" name="tab" checked>
+                post
+            </label>
+            <div>
+                <%# ツイート内容の表示 %>
+                <% @tweets.each do |tweet| %>
+                    <% if @user.s_number == tweet.user_number %>
+                        <h3><%= tweet.user_name %></h3><p><%= tweet.user_number %></p>
+                        <p><%= tweet.content %></p>
+                        <p><%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+                        <%= button_to tweet_destroy_path(tweet.id), method: :delete, class: "destroy_btn" do %>
+                            <%= image_tag("/assets/home/delete.png", alt: "削除") %>
+                        <% end %>
                     <% end %>
-                </div>
+                <% end %>
+            </div>
+
+            <label>
+                <input type="radio" name="tab">
+                media
+            </label>
+            <div>メディア</div>
+
+            <label>
+                <input type="radio" name="tab">
+                good
+            </label>
+            <div>いいね</div>
+        </div>
+        <%#ツイート（投稿）機能 %>
+        <div class="post" id="postModal">
+            <div class="modal-content3">
+                <span class="close3">&times;</span>
+                <img src="/assets/home/icon.jpg">
+                <%= form_for(@tweet, url: "/home") do |f| %>
+                    <%= f.hidden_field :user_name, value: @user.name %>
+                    <%= f.hidden_field :user_number, value: @user.s_number %>
+                    <%# ツイートの書き込み %>
+                    <%= f.text_area :content, rows: 7, placeholder: "What's happening?!", class: "message_content" %>
+                    <%= f.hidden_field :comment, value: nil %>
+                    <%= f.hidden_field :diffusion, value: nil %>
+                    <%= f.hidden_field :like, value: nil %>
+                    <%= f.submit "Post", class: "btn" %>
+                    <%# 削除ボタン %>
+                <% end %>
             </div>
         </div>
-
-
     </main>
+
     <footer class="search">
         <div class="header">
             <p><%= text_field_tag :search, nil, placeholder: "Search..." %></p>
