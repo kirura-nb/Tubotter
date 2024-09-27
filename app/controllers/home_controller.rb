@@ -1,7 +1,11 @@
 class HomeController < ApplicationController
     before_action :current_user
-
+    # ツイート内容の表示（全体）
     def index
+        @tweet = Tweet.new
+        @tweets = Tweet.all.order(created_at: :desc)
+    end
+    def profile
         @tweet = Tweet.new
         @tweets = Tweet.all.order(created_at: :desc)
     end
@@ -16,14 +20,23 @@ class HomeController < ApplicationController
     def messages
         @tweet = Tweet.new
     end
-    def profile
-        @tweet = Tweet.new
-    end
 
+    # ツイート内容を保存
     def create
         tweet = Tweet.new(tweet_params)
         tweet.save
         redirect_to home_index_path
+    end
+
+    def destroy
+        @tweet_destroy = Tweet.find(params[:id])
+        if @tweet_destroy.destroy
+          flash[:notice] = "投稿を削除しました"
+          redirect_to home_index_path
+        else
+          flash.now[:alert] = "削除に失敗しました"
+          render action: "new"
+        end
     end
 
     private

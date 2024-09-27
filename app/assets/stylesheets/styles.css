@@ -111,8 +111,6 @@ body {
 }
 
 
-
-
 /*ポスト*/
 .post {
     display: none; /* 初期状態では非表示 */
@@ -125,49 +123,82 @@ body {
 }
 
 .modal-content3 {
+    display: flex;
     background-color: white;
-    padding: 60px;
-    border-radius: 5px;
+    border-radius: 15px;
     text-align: center;
-    width: 300px;
+    width: 550px;
+    height: 300px;
     margin: 200px auto;
 }
 
-.modal-content3 input {
-    width: 100%;
+.modal-content3 img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    left: auto;
+    margin: 20px;
+    position: relative;
+    top: 15px;
+}
+.message_content {
+    resize: none;
     padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    margin: 30px 0;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    inline-size: 370px;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.modal-content3 button{
-    padding: 10px 20px;
+
+.modal-content3 .btn {
+    position: relative;
     background-color: #1da1f2;
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 18px;
+    bottom: -30px;
+    margin-left: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
 }
 
 .modal-content3 button:hover {
     background-color: #0d8de0;
 }
 
-.content {
-    width: 500px;
-    padding: 20px;
-    border-right: 1px solid #ccc;
-    border-left: 1px solid #ccc;
+.close3{
+    display: block;
+    position: absolute;
+    margin: 10px auto 0px 510px;
+    font-size: 34px;
+    cursor: pointer;
 }
 
 
 /* メインコンテンツ */
 .content {
     width: calc(100% - 260px); /* サイドバーの幅分を引いて全体の幅を調整 */
-    padding: 20px;
+    padding: 0 20px;
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
+}
+/* 削除ボタン */
+.destroy_btn, .menu_btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+}
+.destroy_btn img, .menu_btn img {
+    width: 32px;
+    height: auto;
 }
 
 
@@ -251,7 +282,8 @@ body {
     border-radius: 5px;
 }
 
-.modal-content1 button, .modal-content2 button {
+.modal-content1 .btn, .modal-content2 .btn {
+    width: auto;
     padding: 10px 20px;
     background-color: #1da1f2;
     color: white;
@@ -260,15 +292,14 @@ body {
     border-radius: 5px;
 }
 
-.modal-content1 button:hover, .modal-content2 button:hover {
+.modal-content1 button:hover, .modal-content2 .btn:hover {
     background-color: #0d8de0;
 }
 
 
 
 /* 閉じるボタン */
-
-.close1, .close2, .close3{
+.close1, .close2 {
     display: block;
     position: absolute;
     margin: -40px 0px 0px 320px;
@@ -277,14 +308,26 @@ body {
 }
 
 /*プロフィール画面*/
+.prof_content {
+    width: 600px;
+    padding: 0;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+} 
+.profile {
+    width:600px;
+    height:250px;
+}
 .name {
     color: white;
     background-color: rgba(0, 0, 0, 0.208);
     position: absolute;
-    z-index: 2;
 }
 .yoko {
     display: flex;
+    width:100px;
+    height:100px;
+    border-radius:50%; 
 }
 .edit {
     margin-left: 260px;
@@ -292,7 +335,7 @@ body {
 .tab {
     display: flex;
     flex-wrap: wrap;
-    max-width: 500px;
+    max-width: 600px;
 }
 
 .tab > label {
