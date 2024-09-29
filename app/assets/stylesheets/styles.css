@@ -374,8 +374,11 @@ main {
     padding: 0 5px 0 65px;
     font-size: 1.25em;
 }
-.tweet p {
-    margin: 15px 20px 0 0;
+.tweet_id {
+    margin: 16px 15px 0 0;
+}
+.tweet_time {
+    margin: 14px 20px 0 0;
 }
 .tweet_menu {
     position: absolute;
@@ -385,7 +388,7 @@ main {
 .tweet_content {
     width: 510px;
     height: auto;
-    margin: 0 0 0 65px;
+    margin: 0 0 0 68px;
     text-align: left;
     font-size: 18px;
     word-wrap: break-word;

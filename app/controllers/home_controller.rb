@@ -8,7 +8,9 @@ class HomeController < ApplicationController
     def profile
         @tweet = Tweet.new
         @tweets = Tweet.all.order(created_at: :desc)
-        @tweet_count = @tweets.count
+        # Userのs_numberを参照し、それに対応するTweet.user_numberをカウント
+        tweet_count = Tweet.where(user_number: @user.s_number).order(created_at: :desc)
+        @tweet_count = tweet_count.count
     end
 
     # ツイート
@@ -26,6 +28,7 @@ class HomeController < ApplicationController
     def create
         tweet = Tweet.new(tweet_params)
         tweet.save
+        flash[:notice] = "投稿しました"
         redirect_to home_index_path
     end
 

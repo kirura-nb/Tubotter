@@ -15,13 +15,10 @@ ja:
         one:   "約1分"
         other: "%{count}分"
       about_x_hours:
-        one:   "約1時間"
-        other: "約%{count}時間"
+        one:   "1時間"
+        other: "%{count}時間"
       x_days:
         one:   "1日"
-        other: |
-          <% if (count <= 7) { %>
-            %{count}日
-          <% } else { %>
-            <%= (count / 365).floor %>年<%= ((count % 365) / 30).floor %>ヶ月<%= (count % 30) %>日
-          <% } %>
+        other: "%{count}日"
+      x_days_over_7:
+        other: "%{years}年%{months}ヶ月%{days}日"
