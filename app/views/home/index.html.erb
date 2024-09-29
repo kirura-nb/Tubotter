@@ -9,27 +9,22 @@
 <body>
     <header class="sidebar">
         <%= link_to image_tag("/assets/starlin _logo.png", class: "home_logo"), "index" %>
-
-        <div>
-            <p><img src="/assets/home/home.png"></p>
-            <%= link_to "Home", "index"%>
-        </div>
-        <div>
-            <p><img src="/assets/home/explore.png"></p>
-            <%= link_to 'Explore', "explore" %>
-        </div>
-        <div>
-            <p><img src="/assets/home/notifications.png"></p>
-            <%= link_to 'Notifications', "notifications" %>
-        </div>
-        <div>
-            <p><img src="/assets/home/message.png"></p>
-            <%= link_to 'Messages', "messages" %>
-        </div>
-        <div>
-            <p><img src="/assets/home/pofile.png"></p>
-            <%= link_to 'Profile', "profile" %>
-        </div>
+        
+        <%= link_to "index" do%>
+            <img src="/assets/home/home.png"><p>Home</p>
+        <% end %>
+        <%= link_to "explore" do %>
+            <img src="/assets/home/explore.png"><p>Explore</p>
+        <% end %>
+        <%= link_to "notifications" do %>
+            <img src="/assets/home/notifications.png"><p>Notifications</p>
+        <% end %>
+        <%= link_to "messages" do %>
+            <img src="/assets/home/message.png"><p>Messages</p>
+        <% end %>
+        <%= link_to "profile" do %>
+            <img src="/assets/home/pofile.png"><p>Profile</p>
+        <% end %>
         
         <a href="#" class="postbtn" id="openModalpostBtn" >Post</a>
 
@@ -85,7 +80,7 @@
                         <img src="/assets/home/icon.jpg" class="icon">
                         <h3><%= tweet.user_name %></h3>
                         <p>@<%= tweet.user_number %></p>
-                        <p><%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+                        <p><%= "#{time_ago_in_words(tweet.created_at)}前" %></p>
                         <%# 削除ボタン %>
                         <% if @user.s_number == tweet.user_number %>
                             <%= button_to tweet_destroy_path(tweet.id), method: :delete, class: "destroy_btn" do %>
@@ -133,10 +128,8 @@
                 <input type="radio" name="tab">
                 Following
             </label>
-        <div>
-
-        </div>
     </main>
+
     <footer class="search">
         <div class="header">              
             <p><%= text_field_tag :search, nil, placeholder: "Search..." %></p>
@@ -145,25 +138,6 @@
     </footer>
 
     <script>
-        /*ポスト*/
-        const tweet = document.getElementById('postModal');
-        const openModalpostBtn = document.getElementById('openModalpostBtn');
-        const closeBtn3 = document.getElementsByClassName('close3')[0];
-
-        openModalpostBtn.onclick = function() {
-            tweet.style.display = 'block';
-        }
-
-        closeBtn3.onclick = function() {
-            tweet.style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            if (event.target == tweet) {
-                post.style.display = 'none';
-            }
-        }
-
         /*アカウントバー*/
         const bar = document.getElementById('barModal');
         const openModalbarBtn = document.getElementById('openModalbarBtn');
@@ -174,6 +148,30 @@
                 bar.style.display = 'none'; // モーダルを非表示
             } else {
                 bar.style.display = 'block'; // モーダルを表示
+            }
+        }
+
+        /*ポスト*/
+        const tweet = document.getElementById('postModal');
+        const openModalpostBtn = document.getElementById('openModalpostBtn');
+        const closeBtn3 = document.getElementsByClassName('close3')[0];
+        /* スクロールの禁止 */
+        const body = document.getElementsByTagName('body')[0]; // body要素を取得
+
+        openModalpostBtn.onclick = function() {
+            tweet.style.display = 'block';
+            body.classList.add('no_scroll'); // スクロール禁止
+        }
+
+        closeBtn3.onclick = function() {
+            tweet.style.display = 'none';
+            body.classList.remove('no_scroll'); // スクロール許可
+        }
+
+        window.onclick = function(event) {
+            if (event.target == tweet) {
+                tweet.style.display = 'none';
+                body.classList.remove('no_scroll'); // スクロール許可
             }
         }
     </script>

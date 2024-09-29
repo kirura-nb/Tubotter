@@ -8,6 +8,7 @@ class HomeController < ApplicationController
     def profile
         @tweet = Tweet.new
         @tweets = Tweet.all.order(created_at: :desc)
+        @tweet_count = @tweets.count
     end
 
     # ツイート

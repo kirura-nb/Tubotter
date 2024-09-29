@@ -16,18 +16,20 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
-    /* justify-content: center; */
     margin: 0 auto;
     padding: 0;
     width: 1200px;
 }
+/* スクロール禁止時のスタイル */
+.no_scroll {
+    overflow: hidden;
+}
 main {
     flex-basis: 601.5px; /* メインコンテンツの幅を指定 */
-    /* padding: 10px; */
+    padding: 0px;
     box-sizing: border-box;
     border-right: 1px solid #ccc; /* 右に境界線を追加 */
     border-left: 1px solid #ccc; /* 左に境界線を追加 */
-    
 }
 
 
@@ -37,6 +39,7 @@ main {
 .home_logo {
     width: 100px;
     height: auto;
+    padding-top: 5px;
 }
 .sidebar {
     position: sticky;
@@ -55,14 +58,33 @@ main {
     text-decoration: none;
     padding: 10px;
     margin: 10px 0;
-    border-radius: 4px;
     text-align: left;
 }
-.sidebar a:hover {
+.sidebar a[href="index"]:first-child {
+    margin: 0 0 5px 0;
+    padding: 0;
+    width: 110px;
+    border-radius: 50%;
+    text-align: center;
+}
+.sidebar a:hover, .sidebar div:nth-child(-n+6):hover {
     background-color: #ddd;
 }
-.sidebar div {
+.sidebar div:nth-child(3) p, .sidebar div:nth-child(5) p {
+    margin-bottom: 0;
+}
+.sidebar a:nth-child(n+2):nth-child(-n+6) {
     display: flex;
+    width: fit-content;
+    margin: 10px 0;
+    padding: 0 20px 0 15px;
+    border-radius: 32px;
+}
+.sidebar a:nth-child(n+2):nth-child(-n+6) img {
+    width: 28px;
+    height: 28px;
+    margin: 10px 5px;
+    object-fit: cover;
 }
 .sidebar div img {
     width: 28px;
@@ -87,7 +109,6 @@ main {
     bottom: 0;
     margin: 10px 0px;
 }
-
 .accountbar a {
     display: flex;
     width: 250px;
@@ -129,8 +150,7 @@ main {
 }
 .logout {
     border: none;
-    background-color: #fff;
-    /* margin: auto; */
+    background-color: transparent;
     padding-left: 75px;
     cursor: pointer;
     font-size: 16px;
@@ -139,7 +159,7 @@ main {
 
 
 /*ポスト*/
-.post {
+.post, .profile_edit {
     display: none; /* 初期状態では非表示 */
     position: absolute;
     background-color: rgba(0, 0, 0, 0.5); /* 背景を半透明に */
@@ -147,7 +167,7 @@ main {
     top: 0;
     left: 0;
     height: 100%;
-    z-index: 1;
+    z-index: 5;
 }
 .modal-content3 {
     display: flex;
@@ -193,7 +213,7 @@ main {
 .modal-content3 button:hover {
     background-color: #0d8de0;
 }
-.close3{
+.close3 {
     display: block;
     position: absolute;
     margin: 10px auto 0px 510px;
@@ -416,7 +436,7 @@ main {
     border-bottom: 1px solid #ccc;
 }
 .good p {
-    margin: 7px 50px 0 0;
+    margin: 7px 100px 0 0;
 }
 .tweet_area button img[alt="返信"] {
     width: 32px;
@@ -451,29 +471,124 @@ main {
 
 
 /*プロフィール画面*/
-.prof_content {
-    position: relative;
-    padding: 0;
-} 
-.profile {
-    width:600px;
-    height:250px;
-}
-.name {
+/* プロフィール設定 */
+.close4 {
+    display: block;
+    position: absolute;
+    margin: 10px auto 0px 510px;
+    font-size: 34px;
+    cursor: pointer;
     color: white;
-    background-color: rgba(0, 0, 0, 0.208);
+}
+/* header */
+.profile_header {
+    position: absolute;
+    display: flex;
+    width: 600px;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    z-index: 1;
+}
+.profile_header a {
+    margin: auto 20px;
+}
+.profile_header img {
+    width: 20px;
+    height: 20px;
+}
+.profile_header h1 {
+    margin: 0 10px;
+    font-size: 28px;
+}
+.profile_header div div {
+    display: flex;
+    margin: 0 0 0 10px;
+}
+.profile_header p {
+    margin: 0;
+    padding-right: 5px;
+}
+/* body */
+.profile_body {
     position: absolute;
 }
-.yoko {
-    display: flex;
-    width:100px;
-    height:100px;
+.profile_body div {
+    position: absolute;
+}
+.profile_body div div {
+    width: 600px;
+    height: 250px;
+}
+.profile_body div div:nth-child(2) {
+    top: 135px;
+    left: 25px;
+    width: 130px;
+    height: 130px;
     border-radius:50%; 
+    background-color: white;
 }
-.edit {
-    margin-left: 260px;
+.profile_body img {
+    max-width: 100%;
+    height: auto;
 }
-.tab {
+.profile_body div img[alt="ProfileImg"] {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    margin: 5px;
+    border-radius:50%;
+}
+.profile_body a {
+    position: absolute;
+    top: 210px;
+    left: 465px;
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+    background-color: white;
+    color: #333;
+    border: 1px solid;
+    border-radius: 32px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.profile_body a:hover {
+    background-color: #ddd;
+}
+.profile_name, .follo {
+    margin-left: 20px;
+}
+.profile_status, .profile_comment {
+    margin: 0 0 15px 0;
+    padding-left: 20px;
+}
+.profile_name {
+    margin-top: 260px;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+.profile_comment {
+    width: 565px;
+    height: auto;
+    word-wrap: break-word;
+}
+.follo {
+    display: flex;
+}
+.follo p {
+    margin-top: 0;
+}
+.follo p:nth-child(1), .follo p:nth-child(3) {
+    padding-right: 3px;
+    font-weight: bold;
+}
+.follo p:nth-child(2) {
+    padding-right: 20px;
+}
+/* 投稿表示 */
+.tab  {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     max-width: 600px;

@@ -10,26 +10,21 @@
     <header class="sidebar">
         <%= link_to image_tag("/assets/starlin _logo.png", class: "home_logo"), "index" %>
         
-        <div>
-            <p><img src="/assets/home/home.png"></p>
-            <%= link_to "Home", "index"%>
-        </div>
-        <div>
-            <p><img src="/assets/home/explore.png"></p>
-            <%= link_to 'Explore', "explore" %>
-        </div>
-        <div>
-            <p><img src="/assets/home/notifications.png"></p>
-            <%= link_to 'Notifications', "notifications" %>
-        </div>
-        <div>
-            <p><img src="/assets/home/message.png"></p>
-            <%= link_to 'Messages', "messages" %>
-        </div>
-        <div>
-            <p><img src="/assets/home/pofile.png"></p>
-            <%= link_to 'Profile', "profile" %>
-        </div>
+        <%= link_to "index" do%>
+            <img src="/assets/home/home.png"><p>Home</p>
+        <% end %>
+        <%= link_to "explore" do %>
+            <img src="/assets/home/explore.png"><p>Explore</p>
+        <% end %>
+        <%= link_to "notifications" do %>
+            <img src="/assets/home/notifications.png"><p>Notifications</p>
+        <% end %>
+        <%= link_to "messages" do %>
+            <img src="/assets/home/message.png"><p>Messages</p>
+        <% end %>
+        <%= link_to "profile" do %>
+            <img src="/assets/home/pofile.png"><p>Profile</p>
+        <% end %>
         
         <a href="#" class="postbtn" id="openModalpostBtn" >Post</a>
 
@@ -54,7 +49,75 @@
     </header>
 
     <main class="prof_content">
+        <!-- プロフィール設定 -->
+        <div class="profile_edit" id="EditModel">
+            <div class="modal-content5">
+                <span class="close4">&times;</span>
+                <div>
+                    <h1>Edit profile</h1>
+                    <%= button_tag("Save", type:"submit") %>
+                </div>
+                <%= image_tag("/assets/home/hedder.jpg", alt: "editHeader") %>
+                <div>
+                    <%= image_tag("/assets/home/exit.png", alt: "exit") %>
+                    <%= image_tag("/assets/home/edita_camera.png", alt: "editCamera") %>
+                </div>
+                <%= image_tag("/assets/home/icon.jpg", alt: "profileEdit") %>
+                <%= image_tag("/assets/home/edita_camera.png", alt: "editCamera") %>
+                <div>
+                    <p>name</p>
+                    <p>name</p>
+                </div>
+                <div>
+                    <p>Bio</p>
+                    <p>コメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメント</p>
+                </div>
+                <div>
+                    <p>Location</p>
+                    <p>Jr2353.new</p>
+                </div>
+                <div>
+                    <p>生年月日</p>
+                    <a href="#"></a>
+                    <h1>1999/11/18</h1>
+                </div>
+            </div>
+        </div>
         <%# プロフ表示 %>
+        <div class="profile_header">
+            <%= link_to image_tag("/assets/home/buck.png", alt: "戻る"), new_sessions_path, method: :get %>
+            <div>
+            <% tweet = @tweets.find { |tweet| @user.s_number == tweet.user_number } %>
+            <% if tweet %>
+            <h1><%= tweet.user_name %></h1>
+            <% end %>
+                <div>
+                    <p><%= @tweet_count  %></p><p>posts</p>
+                </div>
+            </div>
+        </div>
+        <div class="profile_body">
+            <div>
+                <div>
+                    <%= image_tag("/assets/home/hedder.jpg", alt: "ProfileHeader") %>
+                </div>
+                <div>
+                    <%= image_tag("/assets/home/icon.jpg", alt: "ProfileImg") %>
+                </div>
+            </div>
+            <a href="#" class="editBtn" id="openModalEditBtn" >Edit profile</a>
+        </div>
+        <% if tweet %>
+            <h2 class="profile_name"><%= tweet.user_name %></h2>
+            <p class="profile_status">@<%= tweet.user_number %></p>
+        <% end %>
+            <p class="profile_comment">コメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメント</p>
+            <p class="profile_status"><%= @user.created_at.strftime('%Y年%-m月から坪ターを利用しています') %></p>
+            <div class="follo">
+                <p>0</p><p>Following</p>
+                <p>0</p><p>Followers</p>
+            </div>
+            <%# 投稿表示 %>
         <div class="tab">
             <label>
                 <input type="radio" name="tab" checked>
@@ -67,7 +130,7 @@
                             <img src="/assets/home/icon.jpg" class="icon">
                             <h3><%= tweet.user_name %></h3>
                             <p>@<%= tweet.user_number %></p>
-                            <p><%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+                            <p><%= tweet.created_at.strftime('%Y/%m/%d') %></p>
                             <%# 削除ボタン %>
                             <%= button_to tweet_destroy_path(tweet.id), method: :delete, class: "destroy_btn" do %>
                                 <%= image_tag("/assets/home/delete.png", alt: "削除") %>
@@ -132,7 +195,6 @@
                     <%= f.hidden_field :diffusion, value: nil %>
                     <%= f.hidden_field :like, value: nil %>
                     <%= f.submit "Post", class: "btn" %>
-                    <%# 削除ボタン %>
                 <% end %>
             </div>
         </div>
@@ -146,25 +208,7 @@
     </footer>
 
     <script>
-        /*ポスト*/
-        const tweet = document.getElementById('postModal');
-        const openModalpostBtn = document.getElementById('openModalpostBtn');
-        const closeBtn3 = document.getElementsByClassName('close3')[0];
-
-        openModalpostBtn.onclick = function() {
-            tweet.style.display = 'block';
-        }
-
-        closeBtn3.onclick = function() {
-            tweet.style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            if (event.target == tweet) {
-                post.style.display = 'none';
-            }
-        }
-        /*アカウントバー*/
+        /*ログアウトボタン*/
         const bar = document.getElementById('barModal');
         const openModalbarBtn = document.getElementById('openModalbarBtn');
 
@@ -174,6 +218,49 @@
                 bar.style.display = 'none'; // モーダルを非表示
             } else {
                 bar.style.display = 'block'; // モーダルを表示
+            }
+        }
+
+        /*プロフィール設定*/
+        const edit = document.getElementById('EditModel');
+        const openModalEditBtn = document.getElementById('openModalEditBtn');
+        const editClose = document.getElementsByClassName('close4')[0];
+
+        openModalEditBtn.onclick = function() {
+            edit.style.display = 'block';
+        }
+
+        editClose.onclick = function() {
+            edit.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == edit) {
+                edit.style.display = 'none';
+            }
+        }
+
+        /*ポスト*/
+        const tweet = document.getElementById('postModal');
+        const openModalpostBtn = document.getElementById('openModalpostBtn');
+        const closeBtn3 = document.getElementsByClassName('close3')[0];
+        /* スクロールの禁止 */
+        const body = document.getElementsByTagName('body')[0]; // body要素を取得
+
+        openModalpostBtn.onclick = function() {
+            tweet.style.display = 'block';
+            body.classList.add('no_scroll'); // スクロール禁止
+        }
+
+        closeBtn3.onclick = function() {
+            tweet.style.display = 'none';
+            body.classList.remove('no_scroll'); // スクロール許可
+        }
+
+        window.onclick = function(event) {
+            if (event.target == tweet) {
+                tweet.style.display = 'none';
+                body.classList.remove('no_scroll'); // スクロール許可
             }
         }
     </script>
