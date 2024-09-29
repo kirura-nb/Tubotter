@@ -85,14 +85,14 @@
         </div>
         <%# プロフ表示 %>
         <div class="profile_header">
-            <%= link_to image_tag("/assets/home/buck.png", alt: "戻る"), new_sessions_path, method: :get %>
+            <%= link_to image_tag("/assets/home/buck.png", alt: "戻る"),  'javascript:history.back()' %>
             <div>
             <% tweet = @tweets.find { |tweet| @user.s_number == tweet.user_number } %>
             <% if tweet %>
             <h1><%= tweet.user_name %></h1>
             <% end %>
                 <div>
-                    <p><%= @tweet_count  %></p><p>posts</p>
+                    <p><%= @tweet_count %></p><p>posts</p>
                 </div>
             </div>
         </div>
@@ -129,8 +129,8 @@
                         <div class="tweet">
                             <img src="/assets/home/icon.jpg" class="icon">
                             <h3><%= tweet.user_name %></h3>
-                            <p>@<%= tweet.user_number %></p>
-                            <p><%= tweet.created_at.strftime('%Y/%m/%d') %></p>
+                            <p class="tweet_id">@<%= tweet.user_number %></p>
+                            <p class="tweet_time"><%= "#{time_ago_in_words(tweet.created_at)}前" %></p>
                             <%# 削除ボタン %>
                             <%= button_to tweet_destroy_path(tweet.id), method: :delete, class: "destroy_btn" do %>
                                 <%= image_tag("/assets/home/delete.png", alt: "削除") %>
