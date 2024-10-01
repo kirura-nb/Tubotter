@@ -57,40 +57,47 @@
                     <h1>Edit profile</h1>
                     <%= button_tag("Save", type:"submit") %>
                 </div>
-                <%= image_tag("/assets/home/hedder.jpg", alt: "editHeader") %>
                 <div>
-                    <%= image_tag("/assets/home/exit.png", alt: "exit") %>
-                    <%= image_tag("/assets/home/edita_camera.png", alt: "editCamera") %>
+                    <%= image_tag("/assets/home/hedder.jpg", alt: "editHeader") %>
                 </div>
-                <%= image_tag("/assets/home/icon.jpg", alt: "profileEdit") %>
-                <%= image_tag("/assets/home/edita_camera.png", alt: "editCamera") %>
                 <div>
-                    <p>name</p>
-                    <p>name</p>
+                    <div>
+                        <%= image_tag("/assets/home/edita_camera.png", alt: "editCamera") %>
+                    </div>
+                    <div>
+                        <%= image_tag("/assets/home/exit.png", alt: "exit") %>
+                    </div>
+                </div>
+                <div>
+                    <%= image_tag("/assets/home/icon.jpg", alt: "profileEdit") %>
+                    <div>
+                        <%= image_tag("/assets/home/edita_camera.png", alt: "editCamera") %>
+                    </div>
+                </div>
+                <div>
+                    <p>Name</p>
+                    <%= text_field_tag("", @user.name, class: "name") %>
                 </div>
                 <div>
                     <p>Bio</p>
-                    <p>コメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメント</p>
+                    <%= text_area_tag("", "コメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメント", class: "Bio") %>
                 </div>
                 <div>
                     <p>Location</p>
-                    <p>Jr2353.new</p>
+                    <%= text_field_tag("", "Jr2353.new", class: "Location") %>
                 </div>
                 <div>
-                    <p>生年月日</p>
-                    <a href="#"></a>
-                    <h1>1999/11/18</h1>
+                    <p>生年月日・</p>
+                    <a href="#">Edit</a>
                 </div>
+                    <h2>1999/11/18</h2>
             </div>
         </div>
         <%# プロフ表示 %>
         <div class="profile_header">
             <%= link_to image_tag("/assets/home/buck.png", alt: "戻る"),  'javascript:history.back()' %>
             <div>
-            <% tweet = @tweets.find { |tweet| @user.s_number == tweet.user_number } %>
-            <% if tweet %>
-            <h1><%= tweet.user_name %></h1>
-            <% end %>
+            <h1><%= @user.name %></h1>
                 <div>
                     <p><%= @tweet_count %></p><p>posts</p>
                 </div>
@@ -107,17 +114,15 @@
             </div>
             <a href="#" class="editBtn" id="openModalEditBtn" >Edit profile</a>
         </div>
-        <% if tweet %>
-            <h2 class="profile_name"><%= tweet.user_name %></h2>
-            <p class="profile_status">@<%= tweet.user_number %></p>
-        <% end %>
+            <h2 class="profile_name"><%= @user.name %></h2>
+            <p class="profile_status">@<%= @user.s_number %></p>
             <p class="profile_comment">コメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメントコメント</p>
-            <p class="profile_status"><%= @user.created_at.strftime('%Y年%-m月から坪ターを利用しています') %></p>
+            <p class="profile_status"><%= @user.created_at.strftime('%Y年%-m月から坪ッターを利用しています') %></p>
             <div class="follo">
                 <p>0</p><p>Following</p>
                 <p>0</p><p>Followers</p>
             </div>
-            <%# 投稿表示 %>
+        <%# 投稿表示 %>
         <div class="tab">
             <label>
                 <input type="radio" name="tab" checked>
@@ -221,25 +226,6 @@
             }
         }
 
-        /*プロフィール設定*/
-        const edit = document.getElementById('EditModel');
-        const openModalEditBtn = document.getElementById('openModalEditBtn');
-        const editClose = document.getElementsByClassName('close4')[0];
-
-        openModalEditBtn.onclick = function() {
-            edit.style.display = 'block';
-        }
-
-        editClose.onclick = function() {
-            edit.style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            if (event.target == edit) {
-                edit.style.display = 'none';
-            }
-        }
-
         /*ポスト*/
         const tweet = document.getElementById('postModal');
         const openModalpostBtn = document.getElementById('openModalpostBtn');
@@ -260,6 +246,28 @@
         window.onclick = function(event) {
             if (event.target == tweet) {
                 tweet.style.display = 'none';
+                body.classList.remove('no_scroll'); // スクロール許可
+            }
+        }
+
+        /*プロフィール設定*/
+        const edit = document.getElementById('EditModel');
+        const openModalEditBtn = document.getElementById('openModalEditBtn');
+        const editClose = document.getElementsByClassName('close4')[0];
+
+        openModalEditBtn.onclick = function() {
+            edit.style.display = 'block';
+            body.classList.add('no_scroll'); // スクロール禁止
+        }
+
+        editClose.onclick = function() {
+            edit.style.display = 'none';
+            body.classList.remove('no_scroll'); // スクロール許可
+        }
+
+        window.onclick = function(event) {
+            if (event.target == edit) {
+                edit.style.display = 'none';
                 body.classList.remove('no_scroll'); // スクロール許可
             }
         }

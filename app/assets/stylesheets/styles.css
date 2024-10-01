@@ -160,7 +160,7 @@ main {
 
 /*ポスト*/
 .post, .profile_edit {
-    display: none; /* 初期状態では非表示 */
+    display: none;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.5); /* 背景を半透明に */
     width: 100%;
@@ -475,13 +475,152 @@ main {
 
 /*プロフィール画面*/
 /* プロフィール設定 */
+.modal-content5 {
+    /* position: relative; */
+    background-color: white;
+    border-radius: 15px;
+    text-align: center;
+    width: 580px;
+    height: 670px;
+    margin: 50px auto;
+}
 .close4 {
     display: block;
     position: absolute;
-    margin: 10px auto 0px 510px;
+    margin: 10px auto 0px 20px;
     font-size: 34px;
     cursor: pointer;
-    color: white;
+}
+.modal-content5 div {
+    display: flex;
+}
+.modal-content5 div h1 {
+    width: 325px;
+    margin: 0;
+    padding: 10px 0 15px 0;
+}
+.modal-content5 div button {
+    width: 80px;
+    height: 35px;
+    margin: 10px 20px 15px 155px;
+    text-align: center;
+    background-color: white;
+    color: #333;
+    border: 1px solid;
+    border-radius: 32px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+.modal-content5 div:nth-child(3) {
+    position: absolute;
+    width: 580px;
+    height: 195px;
+}
+.modal-content5 img[alt="editHeader"] {
+    max-width: 100%;
+    height: auto;
+}
+.modal-content5 div:nth-child(4) {
+    position: absolute;
+}
+.modal-content5 div div:first-child {
+    margin-left: 240px;
+}
+.modal-content5 div div:nth-child(2) {
+    margin-left: 30px;
+}
+.modal-content5 div div {
+    width: 40px;
+    height: 40px;
+    margin: 80px 0;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content5 div img[alt="editCamera"], .modal-content5 div:nth-child(5) img[alt="editCamera"] {
+    width: 28px;
+    height: 32px;
+    padding: 3px 6px;
+}
+.modal-content5 div img[alt="exit"] {
+    width: 18px;
+    height: 18px;
+    padding: 11px;
+}
+.modal-content5 div:nth-child(5) {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    margin: 150px 15px;
+    border-radius: 50%;
+}
+.modal-content5 div:nth-child(5) img {
+    width: 110px;
+    height: 110px;
+    padding: 5px;
+    border-radius: 50%;
+}
+.modal-content5 div:nth-child(5) div {
+    position: absolute;
+    margin: 40px;
+}
+.modal-content5 div:nth-child(6) {
+    display: block;
+    margin: 290px 20px 20px;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+.modal-content5 div:nth-child(6) input,
+.Bio,
+.modal-content5 div:nth-child(8) input {
+    display: block;
+    margin: 0 5px 10px;
+    text-align: left;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    font-weight: bold;
+}
+.modal-content5 div:nth-child(7),
+.modal-content5 div:nth-child(8) {
+    display: block;
+    margin: 10px 20px 10px;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+.modal-content5 div:nth-child(7) {
+    margin-bottom: 20px;
+}
+.modal-content5 div:nth-child(6) p,
+.modal-content5 div:nth-child(7) p, 
+.modal-content5 div:nth-child(8) p,
+.modal-content5 div:nth-child(9) p,
+.modal-content5 h2 {
+    margin: 10px 0 0 7px;
+    text-align: left;
+    font-size: 14px;
+    color: #999;
+}
+.modal-content5 h2 {
+    color: #000;
+    font-size: 20px;
+}
+.Bio {
+    resize: none;
+    width: 527px;
+    height: 55px;
+}
+.modal-content5 div:nth-child(9) {
+    margin: 0 0 0 20px;
+    height: 40px;
+}
+.modal-content5 div:nth-child(9) p {
+    margin-top: 18px;
+}
+.modal-content5 div:nth-child(9) a {
+    margin-top: 20px;
+    text-decoration: none;
+    clear: #2589d0;
 }
 /* header */
 .profile_header {
@@ -595,6 +734,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     max-width: 600px;
+    /* top: 400px; */
 }
 .tab > label {
     flex: 1 1;
