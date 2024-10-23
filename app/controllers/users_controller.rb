@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
     def new
+        render :layout => nil
         @user_new = User.new
     end
 

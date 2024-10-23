@@ -1,179 +1,92 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<%= stylesheet_link_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <title>Twitter Clone</title>
-</head>
-<body>
-    <header class="sidebar">
-        <%= link_to image_tag("/assets/starlin _logo.png", class: "home_logo"), "index" %>
-        
-        <%= link_to "index" do%>
-            <img src="/assets/home/home.png"><p>Home</p>
-        <% end %>
-        <%= link_to "explore" do %>
-            <img src="/assets/home/explore.png"><p>Explore</p>
-        <% end %>
-        <%= link_to "notifications" do %>
-            <img src="/assets/home/notifications.png"><p>Notifications</p>
-        <% end %>
-        <%= link_to "messages" do %>
-            <img src="/assets/home/message.png"><p>Messages</p>
-        <% end %>
-        <%= link_to "profile" do %>
-            <img src="/assets/home/pofile.png"><p>Profile</p>
-        <% end %>
-        
-        <a href="#" class="postbtn" id="openModalpostBtn" >Post</a>
+<main class="content">
+    <%#ツイート（投稿）機能 %>
+    <div class="post" id="postModal">
+        <div class="modal-content3">
+            <span class="close3">&times;</span>
+            <img src="/assets/home/icon.jpg">
+            <%= form_for(@tweet, url: "/home") do |f| %>
+                <%= f.hidden_field :user_name, value: @user.name %>
+                <%= f.hidden_field :user_number, value: @user.s_number %>
+                <%# ツイートの書き込み %>
+                <%= f.text_area :content, rows: 7, placeholder: "What's happening?!", class: "message_content" %>
+                <%= f.hidden_field :comment, value: nil %>
+                <%= f.hidden_field :diffusion, value: nil %>
+                <%= f.hidden_field :like, value: nil %>
+                <%= f.submit "Post", class: "btn" %>
+            <% end %>
+        </div>
+    </div>
+    
+    <%# ツイート内容の表示 %>
+    <div class="display_slct">
+        <%# 全体の投稿 %>
+        <label>
+            <input type="radio" name="tab" checked>
+            For you
+        </label>
+        <div class="tweet_area">
+            <% @tweets.each do |tweet| %>
+                <div class="tweet">
+                    <img src="/assets/home/icon.jpg" class="icon">
+                    <h3><%= tweet.user_name %></h3>
+                    <p class="tweet_id">@<%= tweet.user_number %></p>
 
-        <% if @user.nil? %>
-            <%= link_to "Login", new_sessions_path, method: :get %>
-        <% else %>
-            <%# ログインユーザー名表示 %>
-            <div class="accountbar">
-                <a href="#" id="openModalbarBtn">
-                    <img src="/assets/home/icon.jpg">
-                    <p class="namead"><%= @user.name %></p>
-                    <img src="/assets/home/tententen.png" class="tententen">
-                </a>  
-            </div>
-            <%# ログアウトボタン %>
-            <div class="bar" id="barModal">
-                <div class="modal-content4">
-                    <%= button_to "Logout", destroy_sessions_path,  method: :delete, class: "logout" %>
+                    <%# 投稿日時の表示 %>
+                    <%# 作成からの日数を計算 %>
+                    <% days_since_post = (Date.today - tweet.created_at.to_date).to_i %>
+
+                    <%# 7日以内かどうかで表示を切り替える %>
+                    <% if days_since_post <= 6 %>
+                        <p class="tweet_time" style="margin-top:13px;"><%= "#{time_ago_in_words(tweet.created_at, include_seconds: true)}前" %></p>
+                    <% else %>
+                        <p class="tweet_time" style="margin-top:15px;"><%= tweet.created_at.strftime("%Y/%m/%d") %></p>
+                    <% end %>
+
+                    <%# 削除ボタン %>
+                    <% if @user.s_number == tweet.user_number %>
+                        <%= button_to tweet_destroy_path(tweet.id), method: :delete, class: "destroy_btn" do %>
+                            <%= image_tag("/assets/home/delete.png", alt: "削除") %>
+                        <% end %>
+                    <% else %>
+                        <%= button_to "", class: "menu_btn" do %>
+                            <%= image_tag("/assets/home/tententen.png", alt: "投稿メニュー") %>
+                        <% end %>
+                    <% end %>
                 </div>
-            </div>
-        <% end %>
-    </header>
-
-    <main class="content">
-        <%#ツイート（投稿）機能 %>
-        <div class="post" id="postModal">
-            <div class="modal-content3">
-                <span class="close3">&times;</span>
-                <img src="/assets/home/icon.jpg">
-                <%= form_for(@tweet, url: "/home") do |f| %>
-                    <%= f.hidden_field :user_name, value: @user.name %>
-                    <%= f.hidden_field :user_number, value: @user.s_number %>
-                    <%# ツイートの書き込み %>
-                    <%= f.text_area :content, rows: 7, placeholder: "What's happening?!", class: "message_content" %>
-                    <%= f.hidden_field :comment, value: nil %>
-                    <%= f.hidden_field :diffusion, value: nil %>
-                    <%= f.hidden_field :like, value: nil %>
-                    <%= f.submit "Post", class: "btn" %>
-                <% end %>
-            </div>
+                <%# 投稿表示 %>
+                <p class="tweet_content"><%= tweet.content %></p>
+                <%# 返信やいいねなど %>
+                <div class="good">
+                    <%= button_to "" do %>
+                        <%= image_tag("/assets/home/post.png", alt: "返信") %>
+                    <% end %>
+                    <% if tweet.like == nil %>
+                        <p></p>
+                    <% elsif tweet.like <= 1 %>
+                        <p>0</p>
+                    <% end %>
+                    <%= button_to "" do %>
+                        <%= image_tag("/assets/home/RT.png", alt: "RT") %>
+                    <% end %>
+                    <% if tweet.like == nil %>
+                        <p></p>
+                    <% elsif tweet.like <= 1 %>
+                        <p>0</p>
+                    <% end %>
+                    <%= button_to "" do %>
+                        <%= image_tag("/assets/home/good.png", alt: "いいね") %>
+                    <% end %>
+                    <% if tweet.like == nil %>
+                        <p></p>
+                    <% elsif tweet.like <= 1 %>
+                        <p>0</p>
+                    <% end %>
+                </div>
+            <% end %>
         </div>
-        
-        <%# ツイート内容の表示 %>
-        <div class="display_slct">
-            <%# 全体の投稿 %>
-            <label>
-                <input type="radio" name="tab" checked>
-                For you
-            </label>
-            <div class="tweet_area">
-                <% @tweets.each do |tweet| %>
-                    <div class="tweet">
-                        <img src="/assets/home/icon.jpg" class="icon">
-                        <h3><%= tweet.user_name %></h3>
-                        <p class="tweet_id">@<%= tweet.user_number %></p>
-                        <p class="tweet_time"><%= "#{time_ago_in_words(tweet.created_at)}前" %></p>
-                        <%# 削除ボタン %>
-                        <% if @user.s_number == tweet.user_number %>
-                            <%= button_to tweet_destroy_path(tweet.id), method: :delete, class: "destroy_btn" do %>
-                                <%= image_tag("/assets/home/delete.png", alt: "削除") %>
-                            <% end %>
-                        <% else %>
-                            <%= button_to "", class: "menu_btn" do %>
-                                <%= image_tag("/assets/home/tententen.png", alt: "投稿メニュー") %>
-                            <% end %>
-                        <% end %>
-                    </div>
-                    <%# 投稿表示 %>
-                    <p class="tweet_content"><%= tweet.content %></p>
-                    <%# 返信やいいねなど %>
-                    <div class="good">
-                        <%= button_to "" do %>
-                            <%= image_tag("/assets/home/post.png", alt: "返信") %>
-                        <% end %>
-                        <% if tweet.like == nil %>
-                            <p></p>
-                        <% elsif tweet.like <= 1 %>
-                            <p>0</p>
-                        <% end %>
-                        <%= button_to "" do %>
-                            <%= image_tag("/assets/home/RT.png", alt: "RT") %>
-                        <% end %>
-                        <% if tweet.like == nil %>
-                            <p></p>
-                        <% elsif tweet.like <= 1 %>
-                            <p>0</p>
-                        <% end %>
-                        <%= button_to "" do %>
-                            <%= image_tag("/assets/home/good.png", alt: "いいね") %>
-                        <% end %>
-                        <% if tweet.like == nil %>
-                            <p></p>
-                        <% elsif tweet.like <= 1 %>
-                            <p>0</p>
-                        <% end %>
-                    </div>
-                <% end %>
-            </div>
-            <%# フォローメンバーの投稿 %>
-            <label>
-                <input type="radio" name="tab">
-                Following
-            </label>
-    </main>
-
-    <footer class="search">
-        <div class="header">              
-            <p><%= text_field_tag :search, nil, placeholder: "Search..." %></p>
-            <%= button_tag 'Search', type: 'submit', class: "searchbtn" %>
-        </div>
-    </footer>
-
-    <script>
-        /*アカウントバー*/
-        const bar = document.getElementById('barModal');
-        const openModalbarBtn = document.getElementById('openModalbarBtn');
-
-        openModalbarBtn.onclick = function() {
-            // モーダルが表示されているかどうかを切り替える
-            if (bar.style.display === 'block') {
-                bar.style.display = 'none'; // モーダルを非表示
-            } else {
-                bar.style.display = 'block'; // モーダルを表示
-            }
-        }
-
-        /*ポスト*/
-        const tweet = document.getElementById('postModal');
-        const openModalpostBtn = document.getElementById('openModalpostBtn');
-        const closeBtn3 = document.getElementsByClassName('close3')[0];
-        /* スクロールの禁止 */
-        const body = document.getElementsByTagName('body')[0]; // body要素を取得
-
-        openModalpostBtn.onclick = function() {
-            tweet.style.display = 'block';
-            body.classList.add('no_scroll'); // スクロール禁止
-        }
-
-        closeBtn3.onclick = function() {
-            tweet.style.display = 'none';
-            body.classList.remove('no_scroll'); // スクロール許可
-        }
-
-        window.onclick = function(event) {
-            if (event.target == tweet) {
-                tweet.style.display = 'none';
-                body.classList.remove('no_scroll'); // スクロール許可
-            }
-        }
-    </script>
-</body>
-</html>
+        <%# フォローメンバーの投稿 %>
+        <label>
+            <input type="radio" name="tab">
+            Following
+        </label>
+</main>
