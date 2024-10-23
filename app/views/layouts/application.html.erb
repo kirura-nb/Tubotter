@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
-    <title>Tubotter</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= stylesheet_link_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload' %>
+    
+    <title>Tubotter</title>
   </head>
 
   <body>
@@ -16,7 +21,56 @@
         <%= content_tag(:div, value, class: key) %>
       <% end %>
     </div>
+
+    <header class="sidebar">
+        <%= link_to image_tag("/assets/starlin _logo.png", class: "home_logo"), "index" %>
+        
+        <%= link_to "index" do%>
+            <img src="/assets/home/home.png"><p>Home</p>
+        <% end %>
+        <%= link_to "explore" do %>
+            <img src="/assets/home/explore.png"><p>Explore</p>
+        <% end %>
+        <%= link_to "notifications" do %>
+            <img src="/assets/home/notifications.png"><p>Notifications</p>
+        <% end %>
+        <%= link_to "messages" do %>
+            <img src="/assets/home/message.png"><p>Messages</p>
+        <% end %>
+        <%= link_to "profile" do %>
+            <img src="/assets/home/pofile.png"><p>Profile</p>
+        <% end %>
+        
+        <a href="#" class="postbtn" id="openModalpostBtn" >Post</a>
+
+        <% if @user.nil? %>
+            <%= link_to "Login", new_sessions_path, method: :get %>
+        <% else %>
+            <%# ログインユーザー名表示 %>
+            <div class="accountbar">
+                <a href="#" id="openModalbarBtn">
+                    <img src="/assets/home/icon.jpg">
+                    <p class="namead"><%= @user.name %></p>
+                    <img src="/assets/home/tententen.png" class="tententen">
+                </a>  
+            </div>
+            <%# ログアウトボタン %>
+            <div class="bar" id="barModal">
+                <div class="modal-content4">
+                    <%= button_to "Logout", destroy_sessions_path,  method: :delete, class: "logout" %>
+                </div>
+            </div>
+        <% end %>
+    </header>
+
     <%= yield %>
+
+    <footer class="search">
+        <div class="header">              
+            <p><%= text_field_tag :search, nil, placeholder: "Search..." %></p>
+            <%= button_tag 'Search', type: 'submit', class: "searchbtn" %>
+        </div>
+    </footer>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
@@ -33,6 +87,65 @@
           }
         }, 2500); // 2.5秒後に非表示
       });
+
+        /*アカウントバー*/
+        const bar = document.getElementById('barModal');
+        const openModalbarBtn = document.getElementById('openModalbarBtn');
+
+        openModalbarBtn.onclick = function() {
+            // モーダルが表示されているかどうかを切り替える
+            if (bar.style.display === 'block') {
+                bar.style.display = 'none'; // モーダルを非表示
+            } else {
+                bar.style.display = 'block'; // モーダルを表示
+            }
+        }
+
+        /*ポスト*/
+        const tweet = document.getElementById('postModal');
+        const openModalpostBtn = document.getElementById('openModalpostBtn');
+        const closeBtn3 = document.getElementsByClassName('close3')[0];
+        /* スクロールの禁止 */
+        const body = document.getElementsByTagName('body')[0]; // body要素を取得
+
+        openModalpostBtn.onclick = function() {
+            tweet.style.display = 'block';
+            body.classList.add('no_scroll'); // スクロール禁止
+        }
+
+        closeBtn3.onclick = function() {
+            tweet.style.display = 'none';
+            body.classList.remove('no_scroll'); // スクロール許可
+        }
+
+        window.onclick = function(event) {
+            if (event.target == tweet) {
+                tweet.style.display = 'none';
+                body.classList.remove('no_scroll'); // スクロール許可
+            }
+        }
+
+        /*プロフィール設定*/
+        const edit = document.getElementById('EditModel');
+        const openModalEditBtn = document.getElementById('openModalEditBtn');
+        const editClose = document.getElementsByClassName('close4')[0];
+
+        openModalEditBtn.onclick = function() {
+            edit.style.display = 'flex';
+            body.classList.add('no_scroll'); // スクロール禁止
+        }
+
+        editClose.onclick = function() {
+            edit.style.display = 'none';
+            body.classList.remove('no_scroll'); // スクロール許可
+        }
+
+        window.onclick = function(event) {
+            if (event.target == edit) {
+                edit.style.display = 'none';
+                body.classList.remove('no_scroll'); // スクロール許可
+            }
+        }
     </script>
   </body>
 </html>

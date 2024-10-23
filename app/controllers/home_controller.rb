@@ -1,10 +1,12 @@
 class HomeController < ApplicationController
     before_action :current_user
+
     # ツイート内容の表示（全体）
     def index
         @tweet = Tweet.new
         @tweets = Tweet.all.order(created_at: :desc)
     end
+
     def profile
         @tweet = Tweet.new
         @tweets = Tweet.all.order(created_at: :desc)

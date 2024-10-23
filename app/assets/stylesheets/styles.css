@@ -375,10 +375,10 @@ main {
     font-size: 1.25em;
 }
 .tweet_id {
-    margin: 16px 15px 0 0;
+    margin: 15px 15px 0 0;
 }
 .tweet_time {
-    margin: 14px 20px 0 0;
+    margin-right: 20px;
 }
 .tweet_menu {
     position: absolute;
@@ -475,14 +475,32 @@ main {
 
 /*プロフィール画面*/
 /* プロフィール設定 */
-.modal-content5 {
-    /* position: relative; */
-    background-color: white;
-    border-radius: 15px;
-    text-align: center;
+.profile_edit {
+    justify-content: center;
+    align-items: center;
+}
+.edit_box {
+    position: relative;
     width: 580px;
     height: 670px;
-    margin: 50px auto;
+    overflow: hidden;
+    background-color: white;
+    border: solid 1px black;
+    border-radius: 15px;
+}
+.modal-content5 {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+.modal-content5 div:first-child {
+    position: absolute;
+    display: flex;
+    width: 563.5px;
+    background-color: rgba(120, 120, 120, 0.75);
+    z-index: 2;
 }
 .close4 {
     display: block;
@@ -490,19 +508,20 @@ main {
     margin: 10px auto 0px 20px;
     font-size: 34px;
     cursor: pointer;
-}
-.modal-content5 div {
-    display: flex;
+    color: white;
+    z-index: 2;
 }
 .modal-content5 div h1 {
     width: 325px;
     margin: 0;
-    padding: 10px 0 15px 0;
+    padding: 12px 0 15px 60px;
+    color: white;
 }
 .modal-content5 div button {
+    position: absolute;
     width: 80px;
     height: 35px;
-    margin: 10px 20px 15px 155px;
+    margin: 13px 15px 15px 470px;
     text-align: center;
     background-color: white;
     color: #333;
@@ -512,8 +531,11 @@ main {
     font-size: 16px;
     font-weight: bold;
 }
-.modal-content5 div:nth-child(3) {
-    position: absolute;
+.modal-content5 div button:hover {
+    background-color: #ddd;
+}
+.modal-content5 div:nth-child(2) {
+    position: relative;
     width: 580px;
     height: 195px;
 }
@@ -521,23 +543,20 @@ main {
     max-width: 100%;
     height: auto;
 }
-.modal-content5 div:nth-child(4) {
+.modal-content5 div:nth-child(2) div:nth-of-type(-n+2),
+.modal-content5 div:nth-child(3) div {
     position: absolute;
-}
-.modal-content5 div div:first-child {
-    margin-left: 240px;
-}
-.modal-content5 div div:nth-child(2) {
-    margin-left: 30px;
-}
-.modal-content5 div div {
     width: 40px;
     height: 40px;
-    margin: 80px 0;
+    top: 95px;
+    left: 215px;
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.5);
 }
-.modal-content5 div img[alt="editCamera"], .modal-content5 div:nth-child(5) img[alt="editCamera"] {
+.modal-content5 div:nth-child(2) div:nth-of-type(2) {
+    margin-left: 80px;
+}
+.modal-content5 div img[alt="editCamera"], .modal-content5 div:nth-child(4) img[alt="editCamera"] {
     width: 28px;
     height: 32px;
     padding: 3px 6px;
@@ -547,32 +566,94 @@ main {
     height: 18px;
     padding: 11px;
 }
-.modal-content5 div:nth-child(5) {
+.modal-content5 div:nth-child(3) {
+    height: 75px;
+}
+.modal-content5 div:nth-child(3) div:first-child {
+    position: relative;
+    top: -50px;
+    left: 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: white;
+}
+.modal-content5 div:nth-child(3) img[alt="profileEdit"] {
+    width: 115px;
+    height: 115px;
+    padding: 2.5px;
+    border-radius: 50%;
+    max-width: 100%;
+}
+.modal-content5 div:nth-child(3) div {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+.modal-content5 div:nth-child(n+4):nth-child(-n+6) {
+    width: 500px;
+    margin: 0 20px 30px 20px;
+    padding: 5px 10px;
+    border: solid 1px black;
+    border-radius: 10px;
+}
+.modal-content5 div:nth-child(n+4):nth-child(-n+6) p {
+    margin: 5px 0 5px 0;
+}
+.name, .Bio, .Location {
+    width: 500px;
+    margin-bottom: 5px;
+    text-align: left;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    font-weight: bold;
+}
+.Bio {
+    resize: none;
+    height: 55px;
+}
+.modal-content5 div:nth-child(n+7) {
+    display: flex;
+    margin: 0px 20px 0 20px;
+}
+.modal-content5 div:nth-child(n+7) p {
+    margin: 0;
+}
+.modal-content5 div:nth-child(n+7) a {
+    margin-top: 2px;
+    text-decoration: none;
+    color: #2589d0;;
+}
+.modal-content5 h2 {
+    margin: 0 20px 70px 20px;
+}
+/* .modal-content5 div:nth-child(4) {
     position: absolute;
     width: 120px;
     height: 120px;
     margin: 150px 15px;
     border-radius: 50%;
 }
-.modal-content5 div:nth-child(5) img {
+.modal-content5 div:nth-child(4) img {
     width: 110px;
     height: 110px;
     padding: 5px;
     border-radius: 50%;
 }
-.modal-content5 div:nth-child(5) div {
+.modal-content5 div:nth-child(4) div {
     position: absolute;
     margin: 40px;
 }
-.modal-content5 div:nth-child(6) {
+.modal-content5 div:nth-child(5) {
     display: block;
     margin: 290px 20px 20px;
     border-radius: 5px;
     border: 1px solid #000;
 }
-.modal-content5 div:nth-child(6) input,
+.modal-content5 div:nth-child(5) input,
 .Bio,
-.modal-content5 div:nth-child(8) input {
+.modal-content5 div:nth-child(7) input {
     display: block;
     margin: 0 5px 10px;
     text-align: left;
@@ -581,20 +662,20 @@ main {
     font-size: 17px;
     font-weight: bold;
 }
-.modal-content5 div:nth-child(7),
-.modal-content5 div:nth-child(8) {
+.modal-content5 div:nth-child(6),
+.modal-content5 div:nth-child(7) {
     display: block;
     margin: 10px 20px 10px;
     border-radius: 5px;
     border: 1px solid #000;
 }
-.modal-content5 div:nth-child(7) {
+.modal-content5 div:nth-child(6) {
     margin-bottom: 20px;
 }
-.modal-content5 div:nth-child(6) p,
-.modal-content5 div:nth-child(7) p, 
+.modal-content5 div:nth-child(5) p,
+.modal-content5 div:nth-child(6) p, 
+.modal-content5 div:nth-child(7) p,
 .modal-content5 div:nth-child(8) p,
-.modal-content5 div:nth-child(9) p,
 .modal-content5 h2 {
     margin: 10px 0 0 7px;
     text-align: left;
@@ -604,24 +685,25 @@ main {
 .modal-content5 h2 {
     color: #000;
     font-size: 20px;
+    margin: 0 0 0 25px;
 }
 .Bio {
     resize: none;
-    width: 527px;
+    width: 500px;
     height: 55px;
 }
-.modal-content5 div:nth-child(9) {
+.modal-content5 div:nth-child(8) {
     margin: 0 0 0 20px;
     height: 40px;
 }
-.modal-content5 div:nth-child(9) p {
+.modal-content5 div:nth-child(8) p {
     margin-top: 18px;
 }
-.modal-content5 div:nth-child(9) a {
+.modal-content5 div:nth-child(8) a {
     margin-top: 20px;
     text-decoration: none;
     clear: #2589d0;
-}
+} */
 /* header */
 .profile_header {
     position: absolute;

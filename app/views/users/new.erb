@@ -28,13 +28,13 @@
             <h1>坪ッター アカウント作成</h1>
             <%= form_with model: @user_new, url:users_path, local: true, method: :post do |f| %>
                 <%# ユーザー名の登録 %>
-                <p><%= f.text_field :name, placeholder: "名前", class: "form-box" %></p>
+                <p><%= f.text_field :name, placeholder: "名前（2～16文字）", class: "form-box" %></p>
 
                 <%# 学籍番号登録 %> 
                 <p><%= f.text_field :s_number, placeholder: "学籍番号", class: "form-box" %></p>
 
                 <%# パスワード登録 %>
-                <p><%= f.password_field :password, placeholder: "パスワード", class: "form-box" %></p>
+                <p><%= f.password_field :password, placeholder: "パスワード（数字のみ）", class: "form-box" %></p>
 
                 <%= f.submit "サインアップ", class: "btn" %>
             <% end %>
